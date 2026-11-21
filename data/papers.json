@@ -61,6 +61,65 @@
   ],
   "papers": [
     {
+      "id": "maharjan2026shadowbench",
+      "title": "ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models",
+      "method_name": "ShadowBench / LELR",
+      "authors": [
+        "Sujan Maharjan",
+        "Lu Liu"
+      ],
+      "date": "2026-11",
+      "year": 2026,
+      "venue": "NeurIPS 2026",
+      "paper_url": "https://arxiv.org/abs/2611.15925",
+      "code_url": "https://github.com/sujanW0W/ShadowBench",
+      "project_url": null,
+      "category": "attacks_auditing",
+      "also_categories": [],
+      "subcategory": "Latent Trace Leakage Audit",
+      "stage": "Audit / Evaluation",
+      "target_scope": "CoT + Answer",
+      "models": [
+        "Qwen3-8B",
+        "Llama-3-8B-Instruct"
+      ],
+      "summary": "Defines the Latent Entity Leakage Rate (`LELR`) on name-free shadow prompts and shows that gradient-difference and NPO unlearning on Qwen3-8B still reconstruct the forbidden entity inside the reasoning trace."
+    },
+    {
+      "id": "li2026vkcr",
+      "title": "Reasoning-Aware Cross-Modal Association Unlearning in Multimodal Large Reasoning Models",
+      "method_name": "VKCR",
+      "authors": [
+        "Xinghao Li",
+        "Chenchen Tan",
+        "Youyang Qu",
+        "Shujie Cui",
+        "Xingliang Yuan",
+        "Cunjian Chen",
+        "Chi Liu",
+        "Longxiang Gao"
+      ],
+      "date": "2026-11",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2611.06168",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [
+        "benchmarks"
+      ],
+      "subcategory": "Cross-Modal Association Editing",
+      "stage": "Training-Time & Benchmark",
+      "target_scope": "Multimodal CoT + Answer",
+      "models": [
+        "R1-Onevision-7B-RL",
+        "Qwen2.5-VL-3B-Instruct",
+        "LLaVA-1.5-7B"
+      ],
+      "summary": "Localizes a parameter edit to a designated visual-to-knowledge association and counterfactually rebinds intermediate reasoning, introducing CLEAR-R and MLLMU-R to measure reasoning leakage, hallucinated reassociation, and retained multimodal reasoning."
+    },
+    {
       "id": "maccoby2026redact",
       "title": "REDaCT: Collapse-Free Unlearning in Large Reasoning Models",
       "method_name": "REDaCT",
@@ -114,6 +173,67 @@
       "summary": "Converts unsafe or private CoT disclosures into natural safe-exit trajectories via guidance tokens and distills them into model parameters alongside the NFRS replacement-quality metric."
     },
     {
+      "id": "li2026aria",
+      "title": "Test-Time Unlearning via Sparse Autoencoder",
+      "method_name": "ARIA",
+      "authors": [
+        "Pingzhi Li",
+        "Jinhao Duan",
+        "Vaishnav Tadiparthi",
+        "Nakul Agarwal",
+        "Kwonjoon Lee",
+        "Ehsan Moradi Pari",
+        "Hossein Nourkhiz Mahjoub",
+        "Sijia Liu",
+        "Tianlong Chen"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.16229",
+      "code_url": null,
+      "project_url": null,
+      "category": "inference_time",
+      "also_categories": [],
+      "subcategory": "Leak Detection & Corrective Steering",
+      "stage": "Inference-Time",
+      "target_scope": "CoT + Answer",
+      "models": [
+        "DeepSeek-R1-Distill-Qwen-1.5B",
+        "Gemma-3-1B-it"
+      ],
+      "summary": "Freezes model weights and gates generation with a sparse-autoencoder forget detector, intervening only on triggered states so R-TOFU answers and intermediate CoT traces are suppressed together (`AFE`, `CFE`)."
+    },
+    {
+      "id": "zhong2026lemur",
+      "title": "LEMUR: Latent Entropy-aware Multimodal Unlearning via Visual-anchored Reasoning Redirection",
+      "method_name": "LEMUR",
+      "authors": [
+        "Xinhao Zhong",
+        "Yuxia Qiao",
+        "Junhao Li",
+        "Hao Fang",
+        "Yi Sun",
+        "Bin Chen"
+      ],
+      "date": "2026-08",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2608.11691",
+      "code_url": null,
+      "project_url": null,
+      "category": "inference_time",
+      "also_categories": [],
+      "subcategory": "Leak Detection & Corrective Steering",
+      "stage": "Inference-Time",
+      "target_scope": "Multimodal CoT + Answer",
+      "models": [
+        "R1-Onevision-7B",
+        "Vision-R1-7B"
+      ],
+      "summary": "Uses token-level entropy and forbidden-token mass to delimit sensitive spans inside RL-trained multimodal reasoning traces, then redirects those spans with visual-anchor latent injection while leaving weights frozen."
+    },
+    {
       "id": "qian2026leakresistant",
       "title": "Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness",
       "method_name": "Leak-Resistant Bench",
@@ -141,6 +261,38 @@
         "Mistral-7B"
       ],
       "summary": "Evaluates whether unlearned knowledge remains recoverable across six logic-guided multi-hop reasoning structures combined with prompt-level and parameter-level recovery attacks."
+    },
+    {
+      "id": "mitsuhashi2026deltacot",
+      "title": "Disentangling the Effects of Unlearning in Measuring Parametric Faithfulness of Chain-of-Thought",
+      "method_name": "\u0394IS / \u0394WS",
+      "authors": [
+        "Ryo Mitsuhashi",
+        "Gaku Morio",
+        "Ayana Niwa",
+        "Masahiro Kaneko",
+        "Kentaro Inui",
+        "Terufumi Morishita",
+        "Yuta Koreeda",
+        "Yasuhiro Sogawa"
+      ],
+      "date": "2026-07",
+      "year": 2026,
+      "venue": "ACL 2026 Student Research Workshop",
+      "paper_url": "https://aclanthology.org/2026.acl-srw.36/",
+      "code_url": null,
+      "project_url": null,
+      "category": "faithfulness",
+      "also_categories": [],
+      "subcategory": "Parametric CoT Faithfulness",
+      "stage": "Training-Time Audit",
+      "target_scope": "Individual CoT Steps",
+      "models": [
+        "Llama-3-8B",
+        "Llama-3-70B",
+        "Llama-3.2-3B"
+      ],
+      "summary": "Adds irrelevant-step and word-shuffle controls on top of step-level CoT unlearning, and defines `\u0394IS` and `\u0394WS` so parametric faithfulness scores subtract artifacts of the unlearning update itself."
     },
     {
       "id": "zhou2026mast",
@@ -301,6 +453,33 @@
         "Qwen2.5-7B-Instruct"
       ],
       "summary": "Constructs explicit reasoning-based unlearning targets specifying both unlearning scope and post-unlearning behavior, combining supervised reasoning loss with gradient ascent for explainable and attack-resilient forgetting."
+    },
+    {
+      "id": "lang2026srrs",
+      "title": "Harmonizing Supervised Fine-Tuning and Reinforcement Learning with Reward-Based Sampling for Continual Machine Unlearning",
+      "method_name": "SRRS",
+      "authors": [
+        "Jiaqi Lang",
+        "Jiahao Zhao",
+        "Linjing Li",
+        "Daniel Dajun Zeng"
+      ],
+      "date": "2026-02",
+      "year": 2026,
+      "venue": "Electronics 2026",
+      "paper_url": "https://doi.org/10.3390/electronics15040771",
+      "code_url": "https://github.com/Langjiaqi/SRRS",
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [],
+      "subcategory": "Continual Reward-Routed Unlearning",
+      "stage": "Training-Time",
+      "target_scope": "Full Generation (MU / FE)",
+      "models": [
+        "DeepSeek-R1-Distill-Llama-8B",
+        "Qwen3-4B-Instruct"
+      ],
+      "summary": "Routes continual forget samples between gradient-ascent SFT and GRPO by reward. On ten sequential R-TOFU tasks with DeepSeek-R1-Distill-Llama-8B, forgetting is scored with answer-level Model Utility (`MU`) and Forgetting Efficacy (`FE`) over full generations."
     },
     {
       "id": "zhou2026star",

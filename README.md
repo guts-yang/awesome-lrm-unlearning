@@ -383,16 +383,7 @@ Contributions are warmly welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) 
 
 ## Citation
 
-If you find this repository helpful in your research on LRM or CoT unlearning, please consider citing it:
-
-```bibtex
-@misc{awesome-lrm-unlearning,
-  title        = {{Awesome LRM Unlearning: A Curated List of Chain-of-Thought and Large Reasoning Model Machine Unlearning}},
-  author       = {guts-yang},
-  year         = {2026},
-  howpublished = {\url{https://github.com/guts-yang/awesome-lrm-unlearning}}
-}
-```
+This repository is a curated collection and navigation aid for machine unlearning in Large Reasoning Models (LRMs) and Chain-of-Thought (CoT) reasoning, not a published paper. It does not require a citation of its own. If you find the list useful, please [star the repository](https://github.com/guts-yang/awesome-lrm-unlearning). When your work depends on a listed result, cite that paper, benchmark, or codebase individually.
 
 ## Star History
 

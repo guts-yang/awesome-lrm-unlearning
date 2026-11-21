@@ -319,17 +319,12 @@ def render_readme() -> str:
     lines.append("## Citation")
     lines.append("")
     lines.append(
-        "If you find this repository helpful in your research on LRM or CoT unlearning, please consider citing it:"
+        "This repository is a curated collection and navigation aid for machine unlearning "
+        "in Large Reasoning Models (LRMs) and Chain-of-Thought (CoT) reasoning, not a published paper. "
+        "It does not require a citation of its own. If you find the list useful, please "
+        f"[star the repository](https://github.com/{owner}/{repo_name}). "
+        "When your work depends on a listed result, cite that paper, benchmark, or codebase individually."
     )
-    lines.append("")
-    lines.append("```bibtex")
-    lines.append("@misc{awesome-lrm-unlearning,")
-    lines.append("  title        = {{Awesome LRM Unlearning: A Curated List of Chain-of-Thought and Large Reasoning Model Machine Unlearning}},")
-    lines.append(f"  author       = {{{owner}}},")
-    lines.append("  year         = {2026},")
-    lines.append(f"  howpublished = {{\\url{{https://github.com/{owner}/{repo_name}}}}}")
-    lines.append("}")
-    lines.append("```")
     lines.append("")
 
     lines.append("## Star History")
