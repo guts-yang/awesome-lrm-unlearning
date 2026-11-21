@@ -1,0 +1,219 @@
+{
+  "benchmarks": [
+    {
+      "name": "R-TOFU (Reasoning-TOFU)",
+      "type": "Dedicated LRM Unlearning",
+      "scale": "4,000 QA + Aligned CoTs (200 fictitious authors; forget01 / forget05 / forget10)",
+      "modality": "Text (CoT + Answer)",
+      "focus": "Entity privacy unlearning across intermediate CoT steps and final answers, plus ZeroThink/LessThink decoding robustness.",
+      "url": "https://ai-isl.github.io/r-tofu",
+      "paper_url": "https://arxiv.org/abs/2505.15214"
+    },
+    {
+      "name": "RMLLMU-Bench",
+      "type": "Dedicated Multimodal LRM Unlearning",
+      "scale": "Multi-split Forget / Retain / Celebrity & General VQA with Visual CoTs",
+      "modality": "Image + Text (Multimodal CoT)",
+      "focus": "Jointly evaluates visual-textual reasoning leakage (`RIL`), answer forgetting, and general multimodal reasoning retention.",
+      "url": "https://arxiv.org/abs/2512.17911",
+      "paper_url": "https://arxiv.org/abs/2512.17911"
+    },
+    {
+      "name": "Leak-Resistant Unlearning Benchmark",
+      "type": "Multi-Hop Reasoning & Recovery",
+      "scale": "6 logic-guided multi-hop reasoning structures across 2 curated datasets",
+      "modality": "Text (Multi-Hop Reasoning)",
+      "focus": "Measures indirect knowledge leakage via multi-hop logical paths and post-unlearning prompt/parameter recovery attacks.",
+      "url": "https://leak-resistant.site",
+      "paper_url": "https://arxiv.org/abs/2608.04519"
+    },
+    {
+      "name": "RETURN (Real-World LRM Memorization Split)",
+      "type": "Real-World LRM Privacy Unlearning",
+      "scale": "260 deeply memorized public-figure QA pairs (50% Forget / 50% Retain)",
+      "modality": "Text (Native LRM CoT + Answer)",
+      "focus": "Evaluates unlearning of naturally memorized real-world PII in native DeepSeek-R1-Distill CoT trajectories rather than synthetic traces.",
+      "url": "https://github.com/TerryLee77/CiPO",
+      "paper_url": "https://arxiv.org/abs/2604.15847"
+    },
+    {
+      "name": "STAR-1 Harmful-Intent LRM Split",
+      "type": "Safety & Harmful Rationale Unlearning",
+      "scale": "Curated harmful-intent prompts with safety-aligned vs. unsafe reasoning traces",
+      "modality": "Text (Safety CoT + Refusal)",
+      "focus": "Tests whether LRM unlearning replaces unsafe intermediate rationales with coherent safe-exit trajectories without degenerating.",
+      "url": "https://github.com/zeyu-Yan/GUARD",
+      "paper_url": "https://arxiv.org/abs/2609.21677"
+    },
+    {
+      "name": "WMDP + StrongReject / WildJailbreak / JBB-Behaviors",
+      "type": "Hazardous Knowledge & Safety Suites (Adapted to LRMs)",
+      "scale": "3,668 bio/cyber/chem MCQs (WMDP) + adversarial safety prompts",
+      "modality": "Text (CoT Trace + Answer)",
+      "focus": "Adopted in R2MU to measure hazardous reasoning trace unlearning (`RT-UA`) alongside final answer suppression (`FA-UA`).",
+      "url": "https://github.com/OPTML-Group/Unlearn-R2MU",
+      "paper_url": "https://arxiv.org/abs/2506.12963"
+    },
+    {
+      "name": "AIME 2024 / MATH-500 / GPQA Diamond / GSM8K + LIMO",
+      "type": "General Reasoning Preservation & Supervision Suites",
+      "scale": "Competition math, graduate-level STEM QA, and high-quality CoT supervision triplets",
+      "modality": "Text (Multi-Step STEM CoT)",
+      "focus": "Standard utility suites verifying that LRM unlearning does not induce reasoning collapse or degrade test-time scaling competence.",
+      "url": "https://github.com/OPTML-Group/Unlearn-R2MU",
+      "paper_url": "https://arxiv.org/abs/2506.12963"
+    }
+  ],
+  "metric_groups": [
+    {
+      "group": "Reasoning-Trace Forgetting Metrics",
+      "metrics": [
+        {
+          "name": "CFE (CoT Forgetting Efficacy)",
+          "granularity": "Step-wise CoT Trace",
+          "description": "Aggregates step-level ROUGE recall, step-level cosine similarity, and LLM-as-Judge entailment between generated CoT steps and ground-truth forget facts (higher = stronger trace forgetting).",
+          "reference": "R-TOFU (Yoon et al., 2025)"
+        },
+        {
+          "name": "RT-UA / CoT-UA (Reasoning Trace Unlearning Accuracy)",
+          "granularity": "Full CoT Trajectory",
+          "description": "Fraction or judge-scored rate at which intermediate `<think>...</think>` trajectories still disclose sensitive or hazardous forget-set knowledge (lower = better forgetting).",
+          "reference": "R2MU (Wang et al., 2025); CiPO (Li et al., 2026)"
+        },
+        {
+          "name": "RIL (Reasoning Information Leakage)",
+          "granularity": "Multimodal CoT Process",
+          "description": "Quantifies residual target entity/attribute disclosure specifically inside intermediate multimodal reasoning steps on RMLLMU-Bench.",
+          "reference": "R-MUSE (Li et al., 2025)"
+        }
+      ]
+    },
+    {
+      "group": "Answer-Level Forgetting Metrics",
+      "metrics": [
+        {
+          "name": "AFE (Answer Forgetting Efficacy)",
+          "granularity": "Final Answer Span",
+          "description": "Complements ROUGE, token probability, truth ratio, and LLM-as-Judge checks on the post-`</think>` final answer span (higher = stronger answer forgetting).",
+          "reference": "R-TOFU (Yoon et al., 2025)"
+        },
+        {
+          "name": "FA-UA / ForgetACC (Final Answer Unlearning Accuracy)",
+          "granularity": "Final Answer Span",
+          "description": "Task accuracy or factual recall on forget-set queries measured strictly on the final output after reasoning terminates (lower = better forgetting).",
+          "reference": "R2MU (Wang et al., 2025); CiPO (Li et al., 2026)"
+        }
+      ]
+    },
+    {
+      "group": "Reasoning Preservation & Structural Integrity Metrics",
+      "metrics": [
+        {
+          "name": "RA (Reasoning Ability)",
+          "granularity": "General STEM Reasoning",
+          "description": "Pass@1 accuracy across held-out multi-step reasoning benchmarks (`AIME 2024`, `MATH-500`, `GPQA Diamond`, `GSM8K`) post-unlearning (higher = better retention).",
+          "reference": "R2MU (Wang et al., 2025)"
+        },
+        {
+          "name": "Reasoning Collapse Rate / Closing-Delimiter Rate",
+          "granularity": "CoT Structural Validity",
+          "description": "Proportion of responses that degenerate into infinite token loops, gibberish, or fail to emit the closing `</think>` delimiter before token budget exhaustion (0% = collapse-free).",
+          "reference": "REDaCT (Maccoby & Wang, 2026)"
+        },
+        {
+          "name": "NFRS (Natural Forgetting Reasoning Score)",
+          "granularity": "Post-Forgetting Trajectory Quality",
+          "description": "Evaluates structural boundary stability, fluency, and absence of hallucinated unsupported substitutes in safe-exit CoT trajectories.",
+          "reference": "GUARD (Yan et al., 2026)"
+        }
+      ]
+    },
+    {
+      "group": "Decoding Robustness, Privacy & Faithfulness Audit Metrics",
+      "metrics": [
+        {
+          "name": "ZeroThink / LessThink Decoding Leakage",
+          "granularity": "Constrained-Thinking Decoding",
+          "description": "Measures forgotten knowledge resurgence when bypassing (`<think></think>`) or truncating the thinking phase at inference time.",
+          "reference": "R-TOFU (Yoon et al., 2025)"
+        },
+        {
+          "name": "MCS & Multi-Granularity MIA",
+          "granularity": "Cross-Decoding & Trace/Answer Privacy",
+          "description": "Multi-Decoding Consistency Score (`MCS`) across sampling/thinking modes paired with Membership Inference Attacks at both CoT-chain and answer levels.",
+          "reference": "STaR (Zhou et al., 2026)"
+        },
+        {
+          "name": "Decode-Time Prefill Swap & Teacher-Forced Canary Probe",
+          "granularity": "Parser-Split Audit Validity",
+          "description": "Pairs fixed non-canary thinking prefills with decoding-free teacher-forced continuation scoring to separate true weight memorization from template echo and format drift.",
+          "reference": "Canary Audit (Li et al., 2026)"
+        },
+        {
+          "name": "ff-hard & ff-soft (Parametric CoT Faithfulness)",
+          "granularity": "Individual CoT Step",
+          "description": "Measures prediction label flip (`ff-hard`) and target-answer probability drop (`ff-soft`) after unlearning a single CoT step from model parameters.",
+          "reference": "FUR (Tutek et al., 2025)"
+        }
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Unlearn-R2MU",
+      "paper_id": "wang2025r2mu",
+      "venue": "EMNLP 2025",
+      "url": "https://github.com/OPTML-Group/Unlearn-R2MU",
+      "description": "Official codebase for Reasoning-aware Representation Misdirection for Unlearning (`R2MU`) on DeepSeek-R1-Distill models across WMDP and safety/math suites."
+    },
+    {
+      "name": "R-TOFU Benchmark Suite",
+      "paper_id": "yoon2025rtofu",
+      "venue": "EMNLP 2025",
+      "url": "https://ai-isl.github.io/r-tofu",
+      "description": "Benchmark portal, CoT-annotated fictitious-author splits, step-wise `CFE`/`AFE` evaluators, and `Reasoned IDK` / `ZeroThink` / `LessThink` protocols."
+    },
+    {
+      "name": "CiPO",
+      "paper_id": "li2026cipo",
+      "venue": "ACL 2026",
+      "url": "https://github.com/TerryLee77/CiPO",
+      "description": "Counterfactual CoT generator and online iterative SimPO unlearning pipeline evaluated on R-TOFU and real-world RETURN splits."
+    },
+    {
+      "name": "REDaCT",
+      "paper_id": "maccoby2026redact",
+      "venue": "Findings of EMNLP 2026",
+      "url": "https://github.com/jmaccoby/redact",
+      "description": "Collapse-free inference-time sentence-level RoBERTa leak detector and corrective embedding optimization for DeepSeek-R1-Distill LRMs."
+    },
+    {
+      "name": "GUARD",
+      "paper_id": "yan2026guard",
+      "venue": "Preprint 2026",
+      "url": "https://github.com/zeyu-Yan/GUARD",
+      "description": "Guided Answer-Reasoning Distillation training pipeline and Natural Forgetting Reasoning Score (`NFRS`) evaluation suite."
+    },
+    {
+      "name": "PoRT",
+      "paper_id": "chen2026port",
+      "venue": "ICLR 2026",
+      "url": "https://github.com/ChnIRuI/PoRT_LLM_Unlearning",
+      "description": "Post-judgment and selective multi-round thinking (`SMT`) framework for attack-resilient inference-time unlearning."
+    },
+    {
+      "name": "Parametric-Faithfulness (FUR)",
+      "paper_id": "tutek2025fur",
+      "venue": "EMNLP 2025",
+      "url": "https://github.com/technion-cs-nlp/parametric-faithfulness",
+      "description": "Step-level CoT unlearning pipeline (`FUR`) and `ff-hard`/`ff-soft` parametric faithfulness evaluators."
+    },
+    {
+      "name": "UnStar",
+      "paper_id": "sinha2024unstar",
+      "venue": "TMLR 2025",
+      "url": "https://github.com/MachineUnlearn/UnStar",
+      "description": "Self-taught anti-sample rationale generation and targeted association unlearning implementation."
+    }
+  ]
+}

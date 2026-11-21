@@ -1,0 +1,23 @@
+name: Validate Data & README Sync
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Schema, Figure & README Sync Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run data, anchor, figure, and README sync checks
+        run: python3 scripts/validate_data.py --check-readme

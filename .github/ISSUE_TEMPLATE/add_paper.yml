@@ -1,0 +1,71 @@
+name: Add LRM / CoT Unlearning Paper or Resource
+description: Propose a new paper, benchmark, metric, or codebase on Chain-of-Thought (CoT) or Large Reasoning Model (LRM) machine unlearning.
+title: "[Paper] "
+labels: ["paper-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to **Awesome LRM Unlearning**!
+        Please confirm that the work explicitly studies **Chain-of-Thought (CoT) reasoning traces**, **thinking trajectories**, or **Large Reasoning Models (LRMs)** in the context of machine unlearning.
+
+  - type: input
+    id: title
+    attributes:
+      label: Paper Title
+      placeholder: "e.g., Reasoning Model Unlearning: Forgetting Traces, Not Just Answers..."
+    validations:
+      required: true
+
+  - type: input
+    id: authors
+    attributes:
+      label: Author(s)
+      placeholder: "Comma-separated full names"
+    validations:
+      required: true
+
+  - type: input
+    id: date_venue
+    attributes:
+      label: Date (YYYY-MM) & Venue
+      placeholder: "e.g., 2026-10 | EMNLP 2026 (or Preprint)"
+    validations:
+      required: true
+
+  - type: input
+    id: paper_url
+    attributes:
+      label: Paper URL
+      placeholder: "https://arxiv.org/abs/..."
+    validations:
+      required: true
+
+  - type: input
+    id: code_url
+    attributes:
+      label: Code / Project URL (Optional)
+      placeholder: "https://github.com/..."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Primary Taxonomy Pillar
+      options:
+        - "1. Parameter-Update LRM & CoT Unlearning"
+        - "2. Inference-Time & Training-Free Trajectory Regulation"
+        - "3. Benchmarks & Holistic Evaluation Suites"
+        - "4. Attacks, Vulnerabilities & Memorization Auditing"
+        - "5. CoT Faithfulness via Reasoning-Step Unlearning"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Relevance to CoT / LRM Unlearning (1-2 sentences)
+      description: Briefly describe how the work addresses intermediate reasoning traces or Large Reasoning Models, and list evaluated backbones.
+    validations:
+      required: true
