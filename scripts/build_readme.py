@@ -144,6 +144,9 @@ def render_readme() -> str:
         '  <a href="https://awesome.re"><img src="https://img.shields.io/badge/Awesome-LRM_Unlearning-0F172A?style=for-the-badge&labelColor=000000" alt="Awesome LRM Unlearning"></a>'
     )
     lines.append(
+        f'  <a href="#papers-by-chronological-order"><img src="https://img.shields.io/badge/Papers-{total_papers}-0F172A?style=for-the-badge&labelColor=000000" alt="{total_papers} registered papers"></a>'
+    )
+    lines.append(
         f'  <a href="https://github.com/{owner}/{repo_name}/commits"><img src="https://img.shields.io/github/last-commit/{owner}/{repo_name}?style=for-the-badge&logo=github&logoColor=white&label=Last%20Commit&labelColor=000000&color=0F172A" alt="Last Commit"></a>'
     )
     lines.append(
@@ -211,15 +214,26 @@ def render_readme() -> str:
     lines.append("")
     lines.append("$$\\pi_{\\theta}(c, a \\mid q) = \\pi_{\\theta}(c \\mid q)\\,\\pi_{\\theta}(a \\mid q, c)$$")
     lines.append("")
-    lines.append('<p align="center">')
+    lines.append('<table align="center"><tr>')
+    lines.append("  <td align=\"center\" valign=\"top\" width=\"50%\">")
     lines.append(
-        '  <img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="90%">'
+        '    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>'
     )
-    lines.append("  <br>")
+    lines.append("    <br>")
     lines.append(
-        '  <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>'
+        '    <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>'
     )
-    lines.append("</p>")
+    lines.append("  </td>")
+    lines.append("  <td align=\"center\" valign=\"top\" width=\"50%\">")
+    lines.append(
+        '    <a href="https://arxiv.org/abs/2505.15214"><img src="figs/rtofu-figure-1.png" alt="R-TOFU benchmark for unlearning in large reasoning models" width="100%"></a>'
+    )
+    lines.append("    <br>")
+    lines.append(
+        '    <em>Figure 1 from <a href="https://arxiv.org/abs/2505.15214">R-TOFU: Unlearning in Large Reasoning Models</a>.</em>'
+    )
+    lines.append("  </td>")
+    lines.append("</tr></table>")
     lines.append("")
     lines.append("Methods that edit only the final answer meet three failure modes on these models.")
     lines.append("")

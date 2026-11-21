@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://awesome.re"><img src="https://img.shields.io/badge/Awesome-LRM_Unlearning-0F172A?style=for-the-badge&labelColor=000000" alt="Awesome LRM Unlearning"></a>
+  <a href="#papers-by-chronological-order"><img src="https://img.shields.io/badge/Papers-34-0F172A?style=for-the-badge&labelColor=000000" alt="34 registered papers"></a>
   <a href="https://github.com/guts-yang/awesome-lrm-unlearning/commits"><img src="https://img.shields.io/github/last-commit/guts-yang/awesome-lrm-unlearning?style=for-the-badge&logo=github&logoColor=white&label=Last%20Commit&labelColor=000000&color=0F172A" alt="Last Commit"></a>
   <a href="https://github.com/guts-yang/awesome-lrm-unlearning/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&labelColor=000000" alt="License"></a>
 </p>
@@ -40,11 +41,18 @@ A large reasoning model writes a chain-of-thought before the answer. Models in t
 
 $$\pi_{\theta}(c, a \mid q) = \pi_{\theta}(c \mid q)\,\pi_{\theta}(a \mid q, c)$$
 
-<p align="center">
-  <img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="90%">
-  <br>
-  <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>
-</p>
+<table align="center"><tr>
+  <td align="center" valign="top" width="50%">
+    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>
+    <br>
+    <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>
+  </td>
+  <td align="center" valign="top" width="50%">
+    <a href="https://arxiv.org/abs/2505.15214"><img src="figs/rtofu-figure-1.png" alt="R-TOFU benchmark for unlearning in large reasoning models" width="100%"></a>
+    <br>
+    <em>Figure 1 from <a href="https://arxiv.org/abs/2505.15214">R-TOFU: Unlearning in Large Reasoning Models</a>.</em>
+  </td>
+</tr></table>
 
 Methods that edit only the final answer meet three failure modes on these models.
 
