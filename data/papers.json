@@ -39,6 +39,10 @@
   ],
   "news": [
     {
+      "date": "2026-11-21",
+      "content": "Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works; refreshed formal venue and code links."
+    },
+    {
       "date": "2026-11",
       "content": "Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics."
     },
@@ -145,6 +149,65 @@
       "summary": "Detects forget-set leaks sentence-by-sentence inside CoT traces and injects an offline-learned corrective embedding to regenerate safe continuations with zero reasoning collapse."
     },
     {
+      "id": "ha2026whiteout",
+      "title": "Mitigating Private Data Leakage in LLMs with Whiteout",
+      "method_name": "Whiteout",
+      "authors": [
+        "Anna Yoo Jeong Ha",
+        "Ronik Bhaskar",
+        "Haitao Zheng",
+        "Ben Y. Zhao"
+      ],
+      "date": "2026-10",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2610.02418",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [],
+      "subcategory": "Reasoning-Aware Private Data Overwriting",
+      "stage": "Training-Time",
+      "target_scope": "LRM Reasoning + Private Attribute Association",
+      "models": [
+        "DeepSeek-R1-Distill-7B",
+        "Phi-4-16B",
+        "GPT-OSS-20B"
+      ],
+      "summary": "Uses precise camouflage-data overwriting for private user-attribute associations and adds synthetic reasoning steps for reasoning models to suppress leakage while preserving reasoning utility."
+    },
+    {
+      "id": "yu2026kbench",
+      "title": "K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments",
+      "method_name": "K-Bench / K-Score",
+      "authors": [
+        "Guangsheng Yu",
+        "Yanna Jiang",
+        "Qin Wang",
+        "Baihe Ma",
+        "Xu Wang"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.12808",
+      "code_url": null,
+      "project_url": null,
+      "category": "benchmarks",
+      "also_categories": [
+        "attacks_auditing"
+      ],
+      "subcategory": "Multi-Channel Agentic Unlearning",
+      "stage": "Benchmark",
+      "target_scope": "CoT + Tools + Retrieval + Summary",
+      "models": [
+        "Llama-3.1-8B",
+        "Mistral-7B",
+        "Qwen3"
+      ],
+      "summary": "Evaluates deployed ReAct agents across six observable channels and shows that suppressing final answers or CoT alone can leave secrets recoverable through tools, observations, retrieval, or summaries."
+    },
+    {
       "id": "yan2026guard",
       "title": "GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation",
       "method_name": "GUARD",
@@ -157,8 +220,8 @@
       ],
       "date": "2026-09",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2609.21677",
+      "venue": "EMNLP 2026 Main",
+      "paper_url": "https://aclanthology.org/2026.emnlp-main.2334/",
       "code_url": "https://github.com/zeyu-Yan/GUARD",
       "project_url": null,
       "category": "parameter_update",
@@ -171,6 +234,116 @@
         "DeepSeek-R1-Distill-Qwen-7B"
       ],
       "summary": "Converts unsafe or private CoT disclosures into natural safe-exit trajectories via guidance tokens and distills them into model parameters alongside the NFRS replacement-quality metric."
+    },
+    {
+      "id": "wang2026dumic",
+      "title": "Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths",
+      "method_name": "DUMIC",
+      "authors": [
+        "Jialu Wang",
+        "Peizhi Niu",
+        "Haoteng Yin",
+        "Hans Hao-Hsun Hsu",
+        "Pan Li"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.34442",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [
+        "benchmarks"
+      ],
+      "subcategory": "Deep Multi-Hop Knowledge-Path Unlearning",
+      "stage": "Training-Time & Audit",
+      "target_scope": "Multi-Hop Reasoning Paths",
+      "models": [
+        "Qwen3.5-27B",
+        "Gemma4-31B-Base"
+      ],
+      "summary": "Searches explicit and latent model-supported reasoning paths and applies confidence-aware minimum cuts to sever multi-hop recovery routes while preserving unrelated knowledge."
+    },
+    {
+      "id": "tang2026pact",
+      "title": "Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets",
+      "method_name": "Pact",
+      "authors": [
+        "Haoran Tang",
+        "Rajiv Khanna"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.38909",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [],
+      "subcategory": "Context-Conditional Behavior Unlearning",
+      "stage": "Training-Time",
+      "target_scope": "CoT + Context-Conditional Behavior",
+      "models": [
+        "DeepSeek-R1-Distill-Qwen-32B",
+        "QwQ-32B"
+      ],
+      "summary": "Builds contrastive forget units from realized deceptions and trains pressure-aware counterfactual reasoning targets that remove deceptive behavior while preserving context use and monitorable CoT traces."
+    },
+    {
+      "id": "shi2026trajectory",
+      "title": "Trajectory Unlearning on LLM-based Agents",
+      "method_name": "GiRPO",
+      "authors": [
+        "Yingdan Shi",
+        "Ren Wang"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.33639",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [
+        "benchmarks"
+      ],
+      "subcategory": "Agent Reasoning-Trajectory Unlearning",
+      "stage": "Training-Time",
+      "target_scope": "Agent CoT + Action Trajectory",
+      "models": [
+        "Qwen2.5-3B-Instruct",
+        "Qwen2.5-7B-Instruct"
+      ],
+      "summary": "Defines trajectory-level unlearning for long-horizon agents and uses Group-injected Relative Policy Optimization to penalize undesired reasoning-action trajectories while preserving task utility."
+    },
+    {
+      "id": "lu2026fedcotvqa",
+      "title": "FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA",
+      "method_name": "FedCoT-VQA / RUM",
+      "authors": [
+        "Rui Lu",
+        "Tao Ling",
+        "Dan Wang",
+        "Qing Li"
+      ],
+      "date": "2026-09",
+      "year": 2026,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2609.26814",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [
+        "benchmarks"
+      ],
+      "subcategory": "Federated CoT Planner Unlearning",
+      "stage": "Federated Training & Unlearning",
+      "target_scope": "Video CoT Planner Trajectory",
+      "models": [
+        "CoT Planner for VideoQA"
+      ],
+      "summary": "Introduces planner-side partitioning, deletion-ready aggregation, and residual unlearning to remove client influence from both federated parameters and CoT planner reasoning-trace behavior without full retraining."
     },
     {
       "id": "li2026aria",
@@ -246,8 +419,8 @@
       ],
       "date": "2026-08",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2608.04519",
+      "venue": "Findings of EMNLP 2026",
+      "paper_url": "https://aclanthology.org/2026.findings-emnlp.2004/",
       "code_url": null,
       "project_url": "https://leak-resistant.site",
       "category": "benchmarks",
@@ -265,7 +438,7 @@
     {
       "id": "mitsuhashi2026deltacot",
       "title": "Disentangling the Effects of Unlearning in Measuring Parametric Faithfulness of Chain-of-Thought",
-      "method_name": "\u0394IS / \u0394WS",
+      "method_name": "ΔIS / ΔWS",
       "authors": [
         "Ryo Mitsuhashi",
         "Gaku Morio",
@@ -292,7 +465,7 @@
         "Llama-3-70B",
         "Llama-3.2-3B"
       ],
-      "summary": "Adds irrelevant-step and word-shuffle controls on top of step-level CoT unlearning, and defines `\u0394IS` and `\u0394WS` so parametric faithfulness scores subtract artifacts of the unlearning update itself."
+      "summary": "Adds irrelevant-step and word-shuffle controls on top of step-level CoT unlearning, and defines `ΔIS` and `ΔWS` so parametric faithfulness scores subtract artifacts of the unlearning update itself."
     },
     {
       "id": "zhou2026mast",
@@ -359,7 +532,7 @@
       "date": "2026-04",
       "year": 2026,
       "venue": "ACL 2026",
-      "paper_url": "https://arxiv.org/abs/2604.15847",
+      "paper_url": "https://aclanthology.org/2026.acl-long.143/",
       "code_url": "https://github.com/TerryLee77/CiPO",
       "project_url": null,
       "category": "parameter_update",
@@ -373,6 +546,32 @@
       "summary": "Formulates LRM unlearning via a causal graph and iteratively pairs self-generated counterfactual CoT-answer trajectories against online-sampled leaking traces using reference-free SimPO."
     },
     {
+      "id": "le2026selective",
+      "title": "Selective Forgetting for Large Reasoning Models",
+      "method_name": "Selective LRM Forgetting",
+      "authors": [
+        "Tuan Le",
+        "Wei Qian",
+        "Mengdi Huai"
+      ],
+      "date": "2026-04",
+      "year": 2026,
+      "venue": "PAKDD 2026",
+      "paper_url": "https://doi.org/10.1007/978-981-92-1468-6_28",
+      "code_url": null,
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [],
+      "subcategory": "Constructive Trace Replacement & Distillation",
+      "stage": "Training-Time",
+      "target_scope": "CoT Segments + Answer",
+      "models": [
+        "DeepSeek-R1-Distill-Llama-8B",
+        "DeepSeek-R1-Distill-Qwen-7B"
+      ],
+      "summary": "Uses RAG-assisted multi-LLM analysis to pinpoint forget-relevant segments within CoT traces, replacing them with logically consistent benign placeholders under a feature-replacement unlearning loss."
+    },
+    {
       "id": "chen2026vulnerabilities",
       "title": "Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning",
       "method_name": "Bi-Level LRM Unlearning Attack",
@@ -384,8 +583,8 @@
       ],
       "date": "2026-04",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2604.04255",
+      "venue": "PAKDD 2026",
+      "paper_url": "https://doi.org/10.1007/978-981-92-1468-6_36",
       "code_url": null,
       "project_url": null,
       "category": "attacks_auditing",
@@ -400,30 +599,34 @@
       "summary": "Introduces white-box and black-box bi-level malicious unlearning requests that force unlearned LRMs to output incorrect answers supported by coherent, deceptive reasoning traces."
     },
     {
-      "id": "le2026selective",
-      "title": "Selective Forgetting for Large Reasoning Models",
-      "method_name": "Selective LRM Forgetting",
+      "id": "shah2026mirage",
+      "title": "The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning",
+      "method_name": "The Unlearning Mirage",
       "authors": [
-        "Tuan Le",
-        "Wei Qian",
-        "Mengdi Huai"
+        "Raj Sanjay Shah",
+        "Jing Huang",
+        "Keerthiram Murugesan",
+        "Nathalie Baracaldo",
+        "Diyi Yang"
       ],
-      "date": "2026-04",
+      "date": "2026-03",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2604.03571",
+      "venue": "COLM 2025",
+      "paper_url": "https://arxiv.org/abs/2603.11266",
       "code_url": null,
-      "project_url": null,
-      "category": "parameter_update",
-      "also_categories": [],
-      "subcategory": "Constructive Trace Replacement & Distillation",
-      "stage": "Training-Time",
-      "target_scope": "CoT Segments + Answer",
-      "models": [
-        "DeepSeek-R1-Distill-Llama-8B",
-        "DeepSeek-R1-Distill-Qwen-7B"
+      "project_url": "https://sites.google.com/view/unlearningmirage/home",
+      "category": "benchmarks",
+      "also_categories": [
+        "attacks_auditing"
       ],
-      "summary": "Uses RAG-assisted multi-LLM analysis to pinpoint forget-relevant segments within CoT traces, replacing them with logically consistent benign placeholders under a feature-replacement unlearning loss."
+      "subcategory": "Dynamic Multi-Hop Recovery Evaluation",
+      "stage": "Benchmark / Audit",
+      "target_scope": "Multi-Hop Reasoning + CoT Query Decomposition",
+      "models": [
+        "Llama-3-8B",
+        "Mistral-7B"
+      ],
+      "summary": "Dynamically generates semantically equivalent and multi-hop probes from pre-unlearning knowledge to expose recovery paths missed by static answer-level unlearning benchmarks."
     },
     {
       "id": "liao2026tru",
@@ -439,8 +642,8 @@
       ],
       "date": "2026-03",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2603.09980",
+      "venue": "ICLR 2026",
+      "paper_url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/1e97fb8a7c9737e9e9f4e0389b25efe8-Abstract-Conference.html",
       "code_url": null,
       "project_url": null,
       "category": "parameter_update",
@@ -493,8 +696,8 @@
       ],
       "date": "2026-01",
       "year": 2026,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2601.09281",
+      "venue": "AAAI 2026",
+      "paper_url": "https://ojs.aaai.org/index.php/AAAI/article/download/40818/44779",
       "code_url": null,
       "project_url": null,
       "category": "inference_time",
@@ -538,6 +741,36 @@
       "summary": "Combines dynamic few-shot query cleaning, joint question-answer post-judgment, and selective multi-round thinking self-correction to defend deployed unlearning systems against prefix and composite reasoning attacks."
     },
     {
+      "id": "wang2025dragon",
+      "title": "DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning",
+      "method_name": "DRAGON",
+      "authors": [
+        "Yaxuan Wang",
+        "Chris Yuhao Liu",
+        "Quan Liu",
+        "Jinlong Pang",
+        "Wei Wei",
+        "Yujia Bao",
+        "Yang Liu"
+      ],
+      "date": "2025-11",
+      "year": 2025,
+      "venue": "ICLR 2026",
+      "paper_url": "https://proceedings.iclr.cc/paper_files/paper/2026/file/eaa3d3f05ae14240b7a6a250ce6ddcd7-Paper-Conference.pdf",
+      "code_url": null,
+      "project_url": null,
+      "category": "inference_time",
+      "also_categories": [],
+      "subcategory": "Multi-Round Thinking & In-Context Guards",
+      "stage": "Inference-Time",
+      "target_scope": "In-Context CoT + Answer",
+      "models": [
+        "Llama-3-8B-Instruct",
+        "Mistral-7B-Instruct"
+      ],
+      "summary": "Routes detected forget-worthy prompts without retain data through a dedicated Chain-of-Thought guard model that generates stepwise reasoning instructions for safe in-context unlearning and continual updates."
+    },
+    {
       "id": "li2025rmuse",
       "title": "Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models",
       "method_name": "R-MUSE / RMLLMU-Bench",
@@ -553,7 +786,7 @@
       "date": "2025-11",
       "year": 2025,
       "venue": "CVPR 2026",
-      "paper_url": "https://arxiv.org/abs/2512.17911",
+      "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html",
       "code_url": null,
       "project_url": null,
       "category": "inference_time",
@@ -570,93 +803,58 @@
       "summary": "Introduces RMLLMU-Bench for Reasoning MLLMs alongside R-MUSE, a training-free subspace steering method that suppresses visual-textual CoT leakage while protecting a Reasoning Retain Subspace."
     },
     {
-      "id": "wang2025dragon",
-      "title": "DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning",
-      "method_name": "DRAGON",
+      "id": "kaneko2025bitsleaked",
+      "title": "Bits Leaked per Query: Information-Theoretic Bounds on Adversarial Attacks against LLMs",
+      "method_name": "Bits Leaked per Query",
       "authors": [
-        "Yaxuan Wang",
-        "Chris Yuhao Liu",
-        "Quan Liu",
-        "Jinlong Pang",
-        "Wei Wei",
-        "Yujia Bao",
-        "Yang Liu"
+        "Masahiro Kaneko",
+        "Timothy Baldwin"
       ],
-      "date": "2025-11",
+      "date": "2025-10",
       "year": 2025,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2511.05784",
-      "code_url": null,
-      "project_url": null,
-      "category": "inference_time",
-      "also_categories": [],
-      "subcategory": "Multi-Round Thinking & In-Context Guards",
-      "stage": "Inference-Time",
-      "target_scope": "In-Context CoT + Answer",
-      "models": [
-        "Llama-3-8B-Instruct",
-        "Mistral-7B-Instruct"
-      ],
-      "summary": "Routes detected forget-worthy prompts without retain data through a dedicated Chain-of-Thought guard model that generates stepwise reasoning instructions for safe in-context unlearning and continual updates."
-    },
-    {
-      "id": "sinha2025sleek",
-      "title": "Step-by-Step Reasoning Attack: Revealing 'Erased' Knowledge in Large Language Models",
-      "method_name": "Sleek",
-      "authors": [
-        "Yash Sinha",
-        "Manit Baser",
-        "Murari Mandal",
-        "Dinil Mon Divakaran",
-        "Mohan Kankanhalli"
-      ],
-      "date": "2025-06",
-      "year": 2025,
-      "venue": "Preprint",
-      "paper_url": "https://arxiv.org/abs/2506.17279",
+      "venue": "NeurIPS 2025 (Spotlight)",
+      "paper_url": "https://arxiv.org/abs/2510.17000",
       "code_url": null,
       "project_url": null,
       "category": "attacks_auditing",
       "also_categories": [],
-      "subcategory": "Reasoning-Based Knowledge Extraction",
-      "stage": "Attack",
-      "target_scope": "CoT Extraction",
+      "subcategory": "Information-Theoretic Unlearning Attack Audit",
+      "stage": "Audit / Evaluation",
+      "target_scope": "Answer Tokens + Logits + Thinking Process",
       "models": [
-        "Llama-2-7B",
-        "Mistral-7B"
+        "DeepSeek-R1",
+        "OLMo-2",
+        "Llama-4"
       ],
-      "summary": "Demonstrates that step-by-step CoT reasoning acts as a black-box backdoor (`Sleek`) to reconstruct superficially erased facts across direct, implied, and indirect multi-step prompts."
+      "summary": "Defines leaked bits per query and quantifies how exposing logits or full thinking processes lowers the query complexity of attacks that recover information intended to be removed by unlearning."
     },
     {
-      "id": "wang2025r2mu",
-      "title": "Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills",
-      "method_name": "R2MU",
+      "id": "wang2025farl",
+      "title": "Reasoning or Retrieval? A Study of Answer Attribution on Large Reasoning Models",
+      "method_name": "FARL",
       "authors": [
-        "Changsheng Wang",
-        "Chongyu Fan",
-        "Yihua Zhang",
-        "Jinghan Jia",
-        "Dennis Wei",
-        "Parikshit Ram",
-        "Nathalie Baracaldo",
-        "Sijia Liu"
+        "Yuhui Wang",
+        "Changjiang Li",
+        "Guangke Chen",
+        "Jiacheng Liang",
+        "Ting Wang"
       ],
-      "date": "2025-06",
+      "date": "2025-09",
       "year": 2025,
-      "venue": "EMNLP 2025",
-      "paper_url": "https://arxiv.org/abs/2506.12963",
-      "code_url": "https://github.com/OPTML-Group/Unlearn-R2MU",
+      "venue": "ICLR 2026",
+      "paper_url": "https://proceedings.iclr.cc/paper_files/paper/2026/file/a7687987dcbbfe70ff5fb658346585df-Paper-Conference.pdf",
+      "code_url": "https://github.com/ZJUWYH/FARL",
       "project_url": null,
       "category": "parameter_update",
       "also_categories": [],
-      "subcategory": "Representation & Mechanism Targeting",
+      "subcategory": "Memory-Retrieval Shortcut Unlearning",
       "stage": "Training-Time",
-      "target_scope": "CoT + Answer",
+      "target_scope": "LRM Retrieval Shortcuts + CoT Reasoning",
       "models": [
-        "DeepSeek-R1-Distill-LLaMA-8B",
-        "DeepSeek-R1-Distill-Qwen-14B"
+        "DeepSeek-R1-Distill",
+        "Qwen3"
       ],
-      "summary": "First systematic study of LRM unlearning; proposes an 'unthinking' representation misdirection loss over elicited CoT segments paired with LIMO CoT representation alignment to preserve reasoning ability."
+      "summary": "Combines memory unlearning with reinforcement learning to suppress retrieval shortcuts that compete with chain-of-thought reasoning and improve reasoning-dominant answer attribution."
     },
     {
       "id": "wang2025rethinking",
@@ -690,6 +888,65 @@
       "summary": "Workshop formulation exposing persistent sensitive information leakage inside LRM thinking trajectories under conventional LLM unlearning and motivating reasoning-aware representation misdirection."
     },
     {
+      "id": "wang2025r2mu",
+      "title": "Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills",
+      "method_name": "R2MU",
+      "authors": [
+        "Changsheng Wang",
+        "Chongyu Fan",
+        "Yihua Zhang",
+        "Jinghan Jia",
+        "Dennis Wei",
+        "Parikshit Ram",
+        "Nathalie Baracaldo",
+        "Sijia Liu"
+      ],
+      "date": "2025-06",
+      "year": 2025,
+      "venue": "EMNLP 2025",
+      "paper_url": "https://aclanthology.org/2025.emnlp-main.220/",
+      "code_url": "https://github.com/OPTML-Group/Unlearn-R2MU",
+      "project_url": null,
+      "category": "parameter_update",
+      "also_categories": [],
+      "subcategory": "Representation & Mechanism Targeting",
+      "stage": "Training-Time",
+      "target_scope": "CoT + Answer",
+      "models": [
+        "DeepSeek-R1-Distill-LLaMA-8B",
+        "DeepSeek-R1-Distill-Qwen-14B"
+      ],
+      "summary": "First systematic study of LRM unlearning; proposes an 'unthinking' representation misdirection loss over elicited CoT segments paired with LIMO CoT representation alignment to preserve reasoning ability."
+    },
+    {
+      "id": "sinha2025sleek",
+      "title": "Step-by-Step Reasoning Attack: Revealing 'Erased' Knowledge in Large Language Models",
+      "method_name": "Sleek",
+      "authors": [
+        "Yash Sinha",
+        "Manit Baser",
+        "Murari Mandal",
+        "Dinil Mon Divakaran",
+        "Mohan Kankanhalli"
+      ],
+      "date": "2025-06",
+      "year": 2025,
+      "venue": "Preprint",
+      "paper_url": "https://arxiv.org/abs/2506.17279",
+      "code_url": null,
+      "project_url": null,
+      "category": "attacks_auditing",
+      "also_categories": [],
+      "subcategory": "Reasoning-Based Knowledge Extraction",
+      "stage": "Attack",
+      "target_scope": "CoT Extraction",
+      "models": [
+        "Llama-2-7B",
+        "Mistral-7B"
+      ],
+      "summary": "Demonstrates that step-by-step CoT reasoning acts as a black-box backdoor (`Sleek`) to reconstruct superficially erased facts across direct, implied, and indirect multi-step prompts."
+    },
+    {
       "id": "yoon2025rtofu",
       "title": "R-TOFU: Unlearning in Large Reasoning Models",
       "method_name": "R-TOFU / Reasoned IDK",
@@ -701,8 +958,8 @@
       "date": "2025-05",
       "year": 2025,
       "venue": "EMNLP 2025",
-      "paper_url": "https://arxiv.org/abs/2505.15214",
-      "code_url": null,
+      "paper_url": "https://aclanthology.org/2025.emnlp-main.265/",
+      "code_url": "https://github.com/ssangyeon/R-TOFU",
       "project_url": "https://ai-isl.github.io/r-tofu",
       "category": "benchmarks",
       "also_categories": [

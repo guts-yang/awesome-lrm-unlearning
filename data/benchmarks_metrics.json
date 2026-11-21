@@ -62,6 +62,33 @@
       "focus": "Standard utility suites verifying that LRM unlearning does not induce reasoning collapse or degrade test-time scaling competence.",
       "url": "https://github.com/OPTML-Group/Unlearn-R2MU",
       "paper_url": "https://arxiv.org/abs/2506.12963"
+    },
+    {
+      "name": "ShadowBench / SB-Unlearning",
+      "type": "Latent Association & CoT Leakage Audit",
+      "scale": "Entity-anonymized shadow prompts with forget / retain controls",
+      "modality": "Text (CoT + Answer)",
+      "focus": "Tests whether unlearned models reconstruct forbidden entities from name-free lexical shadow cues and reasoning traces.",
+      "url": "https://huggingface.co/datasets/shadow-bench/SB-unlearning",
+      "paper_url": "https://arxiv.org/abs/2611.15925"
+    },
+    {
+      "name": "K-Bench",
+      "type": "Agentic Deployment Unlearning",
+      "scale": "Six observable ReAct channels across parametric, prompt, and retrieval substrates",
+      "modality": "Text (Agent CoT + Tools + Retrieval)",
+      "focus": "Measures whether secrets migrate from final answers or CoT into tool calls, tool observations, retrieval, or summaries while preserving agent usability.",
+      "url": "https://arxiv.org/abs/2609.12808",
+      "paper_url": "https://arxiv.org/abs/2609.12808"
+    },
+    {
+      "name": "The Unlearning Mirage Dynamic Evaluation",
+      "type": "Dynamic Multi-Hop Recovery Evaluation",
+      "scale": "Automatically generated single-hop, paraphrase, entity-alias, and multi-hop probes",
+      "modality": "Text (Multi-Hop Reasoning)",
+      "focus": "Stress-tests static unlearning claims by constructing probes from pre-unlearning model knowledge and measuring alternate reasoning-path recovery.",
+      "url": "https://sites.google.com/view/unlearningmirage/home",
+      "paper_url": "https://arxiv.org/abs/2603.11266"
     }
   ],
   "metric_groups": [
@@ -85,6 +112,18 @@
           "granularity": "Multimodal CoT Process",
           "description": "Quantifies residual target entity/attribute disclosure specifically inside intermediate multimodal reasoning steps on RMLLMU-Bench.",
           "reference": "R-MUSE (Li et al., 2025)"
+        },
+        {
+          "name": "LELR (Latent Entity Leakage Rate)",
+          "granularity": "Name-Free CoT Shadow Prompt",
+          "description": "Fraction of anonymized shadow-prompt traces that reconstruct identifying tokens of the forgotten entity; lower indicates deeper latent forgetting.",
+          "reference": "ShadowBench (Maharjan et al., 2026)"
+        },
+        {
+          "name": "K-Score",
+          "granularity": "Agent Deployment Channel Set",
+          "description": "Source-specific forgetting score that credits low leakage only when the deployed agent remains usable across CoT, tools, retrieval, answer, and summary channels.",
+          "reference": "K-Bench (Yu et al., 2026)"
         }
       ]
     },
@@ -154,6 +193,12 @@
           "granularity": "Individual CoT Step",
           "description": "Measures prediction label flip (`ff-hard`) and target-answer probability drop (`ff-soft`) after unlearning a single CoT step from model parameters.",
           "reference": "FUR (Tutek et al., 2025)"
+        },
+        {
+          "name": "Bits Leaked per Query",
+          "granularity": "Observable Signal per Attack Query",
+          "description": "Mutual information between exposed model signals, including answers, logits, or thinking traces, and successful recovery of a hidden target; lower indicates a more expensive attack surface.",
+          "reference": "Bits Leaked per Query (Kaneko & Baldwin, 2025)"
         }
       ]
     }
@@ -214,6 +259,20 @@
       "venue": "TMLR 2025",
       "url": "https://github.com/MachineUnlearn/UnStar",
       "description": "Self-taught anti-sample rationale generation and targeted association unlearning implementation."
+    },
+    {
+      "name": "ShadowBench",
+      "paper_id": "maharjan2026shadowbench",
+      "venue": "NeurIPS 2026",
+      "url": "https://github.com/sujanW0W/ShadowBench",
+      "description": "Latent association audit implementation and SB-Unlearning shadow-prompt dataset for testing CoT reconstruction after lexical unlearning."
+    },
+    {
+      "name": "The Unlearning Mirage",
+      "paper_id": "shah2026mirage",
+      "venue": "COLM 2025",
+      "url": "https://sites.google.com/view/unlearningmirage/home",
+      "description": "Dynamic probe-generation package for evaluating multi-hop and alias-based knowledge recovery after LLM unlearning."
     }
   ]
 }

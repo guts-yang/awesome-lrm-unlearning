@@ -8,7 +8,7 @@
 
 This repository lists papers, benchmarks, evaluation metrics, and code for machine unlearning in large reasoning models (LRMs) and chain-of-thought (CoT) reasoning. It is a reading list for work on the reasoning trace: the steps a model writes before the final answer, often inside `<think>...</think>`.
 
-The list currently contains **25** papers, **7** benchmarks and evaluation suites, **12** LRM-specific evaluation metrics, and **8** codebases and project pages.
+The list currently contains **34** papers, **10** benchmarks and evaluation suites, **15** LRM-specific evaluation metrics, and **10** codebases and project pages.
 
 > **Scope.** An entry belongs here when multi-step chain-of-thought traces, thinking trajectories (`<think>...</think>`), or large reasoning models are central to the method or the evaluation. To add a paper, benchmark, or codebase, open an [Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md).
 
@@ -62,6 +62,7 @@ The bottom row matches the five tables below, from left to right: parameter upda
 
 ## News & Highlights
 
+- **`[2026-11-21]`** Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works; refreshed formal venue and code links.
 - **`[2026-11]`** Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics.
 - **`[2026-10]`** **REDaCT** (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces.
 - **`[2026-09]`** **GUARD** proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`).
@@ -81,15 +82,21 @@ Training-time unlearning algorithms that update model weights or hidden-state re
 | **Paper Title** | **Date** | **Author(s)** | **Venue** | **Method** | **Stage** | **Target Scope** | **Code / Portal** |
 | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
 | [Reasoning-Aware Cross-Modal Association Unlearning in Multimodal Large Reasoning Models](https://arxiv.org/abs/2611.06168) | 2026-11 | Li et al. | *arXiv* | `VKCR` | Training-Time & Benchmark | Multimodal CoT + Answer | - |
-| [GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://arxiv.org/abs/2609.21677) | 2026-09 | Yan et al. | *arXiv* | `GUARD` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD) |
+| [Mitigating Private Data Leakage in LLMs with Whiteout](https://arxiv.org/abs/2610.02418) | 2026-10 | Ha et al. | *arXiv* | `Whiteout` | Training-Time | LRM Reasoning + Private Attribute Association | - |
+| [GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://aclanthology.org/2026.emnlp-main.2334/) | 2026-09 | Yan et al. | *EMNLP 2026 Main* | `GUARD` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD) |
+| [Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths](https://arxiv.org/abs/2609.34442) | 2026-09 | Wang et al. | *arXiv* | `DUMIC` | Training-Time & Audit | Multi-Hop Reasoning Paths | - |
+| [Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets](https://arxiv.org/abs/2609.38909) | 2026-09 | Tang & Khanna | *arXiv* | `Pact` | Training-Time | CoT + Context-Conditional Behavior | - |
+| [Trajectory Unlearning on LLM-based Agents](https://arxiv.org/abs/2609.33639) | 2026-09 | Shi & Wang | *arXiv* | `GiRPO` | Training-Time | Agent CoT + Action Trajectory | - |
+| [FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA](https://arxiv.org/abs/2609.26814) | 2026-09 | Lu et al. | *arXiv* | `FedCoT-VQA / RUM` | Federated Training & Unlearning | Video CoT Planner Trajectory | - |
 | [Mechanism-Guided Selective Unlearning for RLVR-Induced Reasoning](https://arxiv.org/abs/2606.19222) | 2026-06 | Zhou et al. | *arXiv* | `MAST` | Training-Time | RLVR Reasoning Trajectories | - |
-| [CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://arxiv.org/abs/2604.15847) | 2026-04 | Li et al. | *ACL 2026* | `CiPO` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO) |
-| [Selective Forgetting for Large Reasoning Models](https://arxiv.org/abs/2604.03571) | 2026-04 | Le et al. | *arXiv* | `Selective LRM Forgetting` | Training-Time | CoT Segments + Answer | - |
-| [Explainable LLM Unlearning Through Reasoning](https://arxiv.org/abs/2603.09980) | 2026-03 | Liao et al. | *arXiv* | `TRU` | Training-Time | Reasoning Target + Answer | - |
+| [CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://aclanthology.org/2026.acl-long.143/) | 2026-04 | Li et al. | *ACL 2026* | `CiPO` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO) |
+| [Selective Forgetting for Large Reasoning Models](https://doi.org/10.1007/978-981-92-1468-6_28) | 2026-04 | Le et al. | *PAKDD 2026* | `Selective LRM Forgetting` | Training-Time | CoT Segments + Answer | - |
+| [Explainable LLM Unlearning Through Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/1e97fb8a7c9737e9e9f4e0389b25efe8-Abstract-Conference.html) | 2026-03 | Liao et al. | *ICLR 2026* | `TRU` | Training-Time | Reasoning Target + Answer | - |
 | [Harmonizing Supervised Fine-Tuning and Reinforcement Learning with Reward-Based Sampling for Continual Machine Unlearning](https://doi.org/10.3390/electronics15040771) | 2026-02 | Lang et al. | *Electronics 2026* | `SRRS` | Training-Time | Full Generation (MU / FE) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/Langjiaqi/SRRS) |
+| [Reasoning or Retrieval? A Study of Answer Attribution on Large Reasoning Models](https://proceedings.iclr.cc/paper_files/paper/2026/file/a7687987dcbbfe70ff5fb658346585df-Paper-Conference.pdf) | 2025-09 | Wang et al. | *ICLR 2026* | `FARL` | Training-Time | LRM Retrieval Shortcuts + CoT Reasoning | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ZJUWYH/FARL) |
 | [Rethinking Unlearning for Large Reasoning Models](https://openreview.net/forum?id=jyzjeLq7K3) | 2025-06 | Wang et al. | *ICML 2025 MUGen Workshop* | `R2MU (Workshop)` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU) |
-| [Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://arxiv.org/abs/2506.12963) | 2025-06 | Wang et al. | *EMNLP 2025* | `R2MU` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU) |
-| [R-TOFU: Unlearning in Large Reasoning Models](https://arxiv.org/abs/2505.15214) † | 2025-05 | Yoon et al. | *EMNLP 2025* | `R-TOFU / Reasoned IDK` | Benchmark & Training-Time | CoT + Answer | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu) |
+| [Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://aclanthology.org/2025.emnlp-main.220/) | 2025-06 | Wang et al. | *EMNLP 2025* | `R2MU` | Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU) |
+| [R-TOFU: Unlearning in Large Reasoning Models](https://aclanthology.org/2025.emnlp-main.265/) † | 2025-05 | Yoon et al. | *EMNLP 2025* | `R-TOFU / Reasoned IDK` | Benchmark & Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ssangyeon/R-TOFU) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu) |
 | [UnStar: Unlearning with Self-Taught Anti-Sample Reasoning for LLMs](https://arxiv.org/abs/2410.17050) | 2024-10 | Sinha et al. | *TMLR 2025* | `UnStar` | Training-Time | Anti-Sample Rationales + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/MachineUnlearn/UnStar) |
 
 ### 2. Inference-Time & Training-Free Trajectory Regulation
@@ -101,10 +108,10 @@ Parameter-preserving interventions that monitor, steer, truncate-and-regenerate,
 | [REDaCT: Collapse-Free Unlearning in Large Reasoning Models](https://arxiv.org/abs/2610.12769) | 2026-10 | Maccoby & Wang | *Findings of EMNLP 2026* | `REDaCT` | Inference-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jmaccoby/redact) |
 | [Test-Time Unlearning via Sparse Autoencoder](https://arxiv.org/abs/2609.16229) | 2026-09 | Li et al. | *arXiv* | `ARIA` | Inference-Time | CoT + Answer | - |
 | [LEMUR: Latent Entropy-aware Multimodal Unlearning via Visual-anchored Reasoning Redirection](https://arxiv.org/abs/2608.11691) | 2026-08 | Zhong et al. | *arXiv* | `LEMUR` | Inference-Time | Multimodal CoT + Answer | - |
-| [STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://arxiv.org/abs/2601.09281) | 2026-01 | Zhou et al. | *arXiv* | `STaR` | Inference-Time | CoT + Answer | - |
+| [STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://ojs.aaai.org/index.php/AAAI/article/download/40818/44779) | 2026-01 | Zhou et al. | *AAAI 2026* | `STaR` | Inference-Time | CoT + Answer | - |
 | [Robust LLM Unlearning via Post Judgment and Multi-round Thinking](https://openreview.net/forum?id=GBTUVO9vkj) | 2026-01 | Chen et al. | *ICLR 2026* | `PoRT` | Inference-Time | Multi-Round Thinking + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ChnIRuI/PoRT_LLM_Unlearning) |
-| [DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://arxiv.org/abs/2511.05784) | 2025-11 | Wang et al. | *arXiv* | `DRAGON` | Inference-Time | In-Context CoT + Answer | - |
-| [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://arxiv.org/abs/2512.17911) | 2025-11 | Li et al. | *CVPR 2026* | `R-MUSE / RMLLMU-Bench` | Inference-Time & Benchmark | Multimodal CoT + Answer | - |
+| [DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/file/eaa3d3f05ae14240b7a6a250ce6ddcd7-Paper-Conference.pdf) | 2025-11 | Wang et al. | *ICLR 2026* | `DRAGON` | Inference-Time | In-Context CoT + Answer | - |
+| [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html) | 2025-11 | Li et al. | *CVPR 2026* | `R-MUSE / RMLLMU-Bench` | Inference-Time & Benchmark | Multimodal CoT + Answer | - |
 
 ### 3. Benchmarks & Holistic Evaluation Suites
 
@@ -113,9 +120,14 @@ Dedicated benchmarks and CoT-annotated datasets designed to measure step-level r
 | **Paper Title** | **Date** | **Author(s)** | **Venue** | **Method** | **Stage** | **Target Scope** | **Code / Portal** |
 | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
 | [Reasoning-Aware Cross-Modal Association Unlearning in Multimodal Large Reasoning Models](https://arxiv.org/abs/2611.06168) † | 2026-11 | Li et al. | *arXiv* | `VKCR` | Training-Time & Benchmark | Multimodal CoT + Answer | - |
-| [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://arxiv.org/abs/2608.04519) | 2026-08 | Qian et al. | *arXiv* | `Leak-Resistant Bench` | Benchmark | Multi-Hop Reasoning Paths | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://leak-resistant.site) |
-| [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://arxiv.org/abs/2512.17911) † | 2025-11 | Li et al. | *CVPR 2026* | `R-MUSE / RMLLMU-Bench` | Inference-Time & Benchmark | Multimodal CoT + Answer | - |
-| [R-TOFU: Unlearning in Large Reasoning Models](https://arxiv.org/abs/2505.15214) | 2025-05 | Yoon et al. | *EMNLP 2025* | `R-TOFU / Reasoned IDK` | Benchmark & Training-Time | CoT + Answer | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu) |
+| [K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments](https://arxiv.org/abs/2609.12808) | 2026-09 | Yu et al. | *arXiv* | `K-Bench / K-Score` | Benchmark | CoT + Tools + Retrieval + Summary | - |
+| [Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths](https://arxiv.org/abs/2609.34442) † | 2026-09 | Wang et al. | *arXiv* | `DUMIC` | Training-Time & Audit | Multi-Hop Reasoning Paths | - |
+| [Trajectory Unlearning on LLM-based Agents](https://arxiv.org/abs/2609.33639) † | 2026-09 | Shi & Wang | *arXiv* | `GiRPO` | Training-Time | Agent CoT + Action Trajectory | - |
+| [FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA](https://arxiv.org/abs/2609.26814) † | 2026-09 | Lu et al. | *arXiv* | `FedCoT-VQA / RUM` | Federated Training & Unlearning | Video CoT Planner Trajectory | - |
+| [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://aclanthology.org/2026.findings-emnlp.2004/) | 2026-08 | Qian et al. | *Findings of EMNLP 2026* | `Leak-Resistant Bench` | Benchmark | Multi-Hop Reasoning Paths | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://leak-resistant.site) |
+| [The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning](https://arxiv.org/abs/2603.11266) | 2026-03 | Shah et al. | *COLM 2025* | `The Unlearning Mirage` | Benchmark / Audit | Multi-Hop Reasoning + CoT Query Decomposition | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://sites.google.com/view/unlearningmirage/home) |
+| [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html) † | 2025-11 | Li et al. | *CVPR 2026* | `R-MUSE / RMLLMU-Bench` | Inference-Time & Benchmark | Multimodal CoT + Answer | - |
+| [R-TOFU: Unlearning in Large Reasoning Models](https://aclanthology.org/2025.emnlp-main.265/) | 2025-05 | Yoon et al. | *EMNLP 2025* | `R-TOFU / Reasoned IDK` | Benchmark & Training-Time | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ssangyeon/R-TOFU) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu) |
 
 ### 4. Attacks, Vulnerabilities & Memorization Auditing
 
@@ -124,8 +136,11 @@ Adversarial studies and construct-validity audits showing how step-by-step reaso
 | **Paper Title** | **Date** | **Author(s)** | **Venue** | **Method** | **Stage** | **Target Scope** | **Code / Portal** |
 | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
 | [ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models](https://arxiv.org/abs/2611.15925) | 2026-11 | Maharjan & Liu | *NeurIPS 2026* | `ShadowBench / LELR` | Audit / Evaluation | CoT + Answer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/sujanW0W/ShadowBench) |
+| [K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments](https://arxiv.org/abs/2609.12808) † | 2026-09 | Yu et al. | *arXiv* | `K-Bench / K-Score` | Benchmark | CoT + Tools + Retrieval + Summary | - |
 | [Auditing Reasoning-Trace Memorization Claims after Unlearning with Head-Conditioned Canaries](https://arxiv.org/abs/2605.18891) | 2026-05 | Li et al. | *arXiv* | `Canary Prefill Audit` | Audit / Evaluation | CoT + Answer | - |
-| [Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://arxiv.org/abs/2604.04255) | 2026-04 | Chen et al. | *arXiv* | `Bi-Level LRM Unlearning Attack` | Attack | CoT + Answer | - |
+| [Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://doi.org/10.1007/978-981-92-1468-6_36) | 2026-04 | Chen et al. | *PAKDD 2026* | `Bi-Level LRM Unlearning Attack` | Attack | CoT + Answer | - |
+| [The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning](https://arxiv.org/abs/2603.11266) † | 2026-03 | Shah et al. | *COLM 2025* | `The Unlearning Mirage` | Benchmark / Audit | Multi-Hop Reasoning + CoT Query Decomposition | [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://sites.google.com/view/unlearningmirage/home) |
+| [Bits Leaked per Query: Information-Theoretic Bounds on Adversarial Attacks against LLMs](https://arxiv.org/abs/2510.17000) | 2025-10 | Kaneko & Baldwin | *NeurIPS 2025 (Spotlight)* | `Bits Leaked per Query` | Audit / Evaluation | Answer Tokens + Logits + Thinking Process | - |
 | [Step-by-Step Reasoning Attack: Revealing 'Erased' Knowledge in Large Language Models](https://arxiv.org/abs/2506.17279) | 2025-06 | Sinha et al. | *arXiv* | `Sleek` | Attack | CoT Extraction | - |
 
 ### 5. CoT Faithfulness via Reasoning-Step Unlearning
@@ -169,14 +184,62 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Detects forget-set leaks sentence-by-sentence inside CoT traces and injects an offline-learned corrective embedding to regenerate safe continuations with zero reasoning collapse.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jmaccoby/redact)
-- [GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://arxiv.org/abs/2609.21677)
-  - Author(s): Zeyu Yan, Guanghao Zhou, Minghui Qiu, Ming Gao, Cen Chen
+- [Mitigating Private Data Leakage in LLMs with Whiteout](https://arxiv.org/abs/2610.02418)
+  - Author(s): Anna Yoo Jeong Ha, Ronik Bhaskar, Haitao Zheng, Ben Y. Zhao
+  - Date: 2026-10
+  - Venue: -
+  - Category: Parameter-Update Unlearning (`LRM Reasoning + Private Attribute Association`)
+  - Evaluated Backbones: DeepSeek-R1-Distill-7B, Phi-4-16B, GPT-OSS-20B
+  - Summary: Uses precise camouflage-data overwriting for private user-attribute associations and adds synthetic reasoning steps for reasoning models to suppress leakage while preserving reasoning utility.
+  - Code: -
+- [K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments](https://arxiv.org/abs/2609.12808)
+  - Author(s): Guangsheng Yu, Yanna Jiang, Qin Wang, Baihe Ma, Xu Wang
   - Date: 2026-09
   - Venue: -
+  - Category: Benchmarks & Evaluation / Attacks & Auditing (`CoT + Tools + Retrieval + Summary`)
+  - Evaluated Backbones: Llama-3.1-8B, Mistral-7B, Qwen3
+  - Summary: Evaluates deployed ReAct agents across six observable channels and shows that suppressing final answers or CoT alone can leave secrets recoverable through tools, observations, retrieval, or summaries.
+  - Code: -
+- [GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://aclanthology.org/2026.emnlp-main.2334/)
+  - Author(s): Zeyu Yan, Guanghao Zhou, Minghui Qiu, Ming Gao, Cen Chen
+  - Date: 2026-09
+  - Venue: EMNLP 2026 Main
   - Category: Parameter-Update Unlearning (`CoT + Answer`)
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Converts unsafe or private CoT disclosures into natural safe-exit trajectories via guidance tokens and distills them into model parameters alongside the NFRS replacement-quality metric.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD)
+- [Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths](https://arxiv.org/abs/2609.34442)
+  - Author(s): Jialu Wang, Peizhi Niu, Haoteng Yin, Hans Hao-Hsun Hsu, Pan Li
+  - Date: 2026-09
+  - Venue: -
+  - Category: Parameter-Update Unlearning / Benchmarks & Evaluation (`Multi-Hop Reasoning Paths`)
+  - Evaluated Backbones: Qwen3.5-27B, Gemma4-31B-Base
+  - Summary: Searches explicit and latent model-supported reasoning paths and applies confidence-aware minimum cuts to sever multi-hop recovery routes while preserving unrelated knowledge.
+  - Code: -
+- [Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets](https://arxiv.org/abs/2609.38909)
+  - Author(s): Haoran Tang, Rajiv Khanna
+  - Date: 2026-09
+  - Venue: -
+  - Category: Parameter-Update Unlearning (`CoT + Context-Conditional Behavior`)
+  - Evaluated Backbones: DeepSeek-R1-Distill-Qwen-32B, QwQ-32B
+  - Summary: Builds contrastive forget units from realized deceptions and trains pressure-aware counterfactual reasoning targets that remove deceptive behavior while preserving context use and monitorable CoT traces.
+  - Code: -
+- [Trajectory Unlearning on LLM-based Agents](https://arxiv.org/abs/2609.33639)
+  - Author(s): Yingdan Shi, Ren Wang
+  - Date: 2026-09
+  - Venue: -
+  - Category: Parameter-Update Unlearning / Benchmarks & Evaluation (`Agent CoT + Action Trajectory`)
+  - Evaluated Backbones: Qwen2.5-3B-Instruct, Qwen2.5-7B-Instruct
+  - Summary: Defines trajectory-level unlearning for long-horizon agents and uses Group-injected Relative Policy Optimization to penalize undesired reasoning-action trajectories while preserving task utility.
+  - Code: -
+- [FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA](https://arxiv.org/abs/2609.26814)
+  - Author(s): Rui Lu, Tao Ling, Dan Wang, Qing Li
+  - Date: 2026-09
+  - Venue: -
+  - Category: Parameter-Update Unlearning / Benchmarks & Evaluation (`Video CoT Planner Trajectory`)
+  - Evaluated Backbones: CoT Planner for VideoQA
+  - Summary: Introduces planner-side partitioning, deletion-ready aggregation, and residual unlearning to remove client influence from both federated parameters and CoT planner reasoning-trace behavior without full retraining.
+  - Code: -
 - [Test-Time Unlearning via Sparse Autoencoder](https://arxiv.org/abs/2609.16229)
   - Author(s): Pingzhi Li, Jinhao Duan, Vaishnav Tadiparthi, Nakul Agarwal, Kwonjoon Lee, Ehsan Moradi Pari, Hossein Nourkhiz Mahjoub, Sijia Liu, Tianlong Chen
   - Date: 2026-09
@@ -193,10 +256,10 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: R1-Onevision-7B, Vision-R1-7B
   - Summary: Uses token-level entropy and forbidden-token mass to delimit sensitive spans inside RL-trained multimodal reasoning traces, then redirects those spans with visual-anchor latent injection while leaving weights frozen.
   - Code: -
-- [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://arxiv.org/abs/2608.04519)
+- [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://aclanthology.org/2026.findings-emnlp.2004/)
   - Author(s): Haoting Qian, Qingjie Zhang, Zhicong Huang, Cheng Hong, Han Qiu
   - Date: 2026-08
-  - Venue: -
+  - Venue: Findings of EMNLP 2026
   - Category: Benchmarks & Evaluation (`Multi-Hop Reasoning Paths`)
   - Evaluated Backbones: Llama-3-8B, Qwen2.5-7B, Mistral-7B
   - Summary: Evaluates whether unlearned knowledge remains recoverable across six logic-guided multi-hop reasoning structures combined with prompt-level and parameter-level recovery attacks.
@@ -225,7 +288,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Qwen-7B, DeepSeek-R1-Distill-Llama-8B
   - Summary: Audits the parser-split CoT bypass gap on distilled LRMs using six-token canary heads, showing static tag-splitting conflates weight retention with template echo and format drift, and proposes decode-time prefill swaps plus teacher-forced scoring.
   - Code: -
-- [CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://arxiv.org/abs/2604.15847)
+- [CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://aclanthology.org/2026.acl-long.143/)
   - Author(s): Junyi Li, Yongqiang Chen, Ningning Ding
   - Date: 2026-04
   - Venue: ACL 2026
@@ -233,26 +296,34 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B
   - Summary: Formulates LRM unlearning via a causal graph and iteratively pairs self-generated counterfactual CoT-answer trajectories against online-sampled leaking traces using reference-free SimPO.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO)
-- [Selective Forgetting for Large Reasoning Models](https://arxiv.org/abs/2604.03571)
+- [Selective Forgetting for Large Reasoning Models](https://doi.org/10.1007/978-981-92-1468-6_28)
   - Author(s): Tuan Le, Wei Qian, Mengdi Huai
   - Date: 2026-04
-  - Venue: -
+  - Venue: PAKDD 2026
   - Category: Parameter-Update Unlearning (`CoT Segments + Answer`)
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Uses RAG-assisted multi-LLM analysis to pinpoint forget-relevant segments within CoT traces, replacing them with logically consistent benign placeholders under a feature-replacement unlearning loss.
   - Code: -
-- [Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://arxiv.org/abs/2604.04255)
+- [Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://doi.org/10.1007/978-981-92-1468-6_36)
   - Author(s): Aobo Chen, Chenxu Zhao, Chenglin Miao, Mengdi Huai
   - Date: 2026-04
-  - Venue: -
+  - Venue: PAKDD 2026
   - Category: Attacks & Auditing (`CoT + Answer`)
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Introduces white-box and black-box bi-level malicious unlearning requests that force unlearned LRMs to output incorrect answers supported by coherent, deceptive reasoning traces.
   - Code: -
-- [Explainable LLM Unlearning Through Reasoning](https://arxiv.org/abs/2603.09980)
+- [The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning](https://arxiv.org/abs/2603.11266)
+  - Author(s): Raj Sanjay Shah, Jing Huang, Keerthiram Murugesan, Nathalie Baracaldo, Diyi Yang
+  - Date: 2026-03
+  - Venue: COLM 2025
+  - Category: Benchmarks & Evaluation / Attacks & Auditing (`Multi-Hop Reasoning + CoT Query Decomposition`)
+  - Evaluated Backbones: Llama-3-8B, Mistral-7B
+  - Summary: Dynamically generates semantically equivalent and multi-hop probes from pre-unlearning knowledge to expose recovery paths missed by static answer-level unlearning benchmarks.
+  - Code: [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://sites.google.com/view/unlearningmirage/home)
+- [Explainable LLM Unlearning Through Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/1e97fb8a7c9737e9e9f4e0389b25efe8-Abstract-Conference.html)
   - Author(s): Junfeng Liao, Qizhou Wang, Shanshan Ye, Xin Yu, Ling Chen, Zhen Fang
   - Date: 2026-03
-  - Venue: -
+  - Venue: ICLR 2026
   - Category: Parameter-Update Unlearning (`Reasoning Target + Answer`)
   - Evaluated Backbones: Llama-3-8B-Instruct, Qwen2.5-7B-Instruct
   - Summary: Constructs explicit reasoning-based unlearning targets specifying both unlearning scope and post-unlearning behavior, combining supervised reasoning loss with gradient ascent for explainable and attack-resilient forgetting.
@@ -265,10 +336,10 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, Qwen3-4B-Instruct
   - Summary: Routes continual forget samples between gradient-ascent SFT and GRPO by reward. On ten sequential R-TOFU tasks with DeepSeek-R1-Distill-Llama-8B, forgetting is scored with answer-level Model Utility (`MU`) and Forgetting Efficacy (`FE`) over full generations.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/Langjiaqi/SRRS)
-- [STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://arxiv.org/abs/2601.09281)
+- [STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://ojs.aaai.org/index.php/AAAI/article/download/40818/44779)
   - Author(s): Jingjing Zhou, Gaoxiang Cong, Li Su, Liang Li
   - Date: 2026-01
-  - Venue: -
+  - Venue: AAAI 2026
   - Category: Inference-Time Regulation (`CoT + Answer`)
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Parameter-free inference-time framework combining semantic sensitivity detection, global safety prompt prefixes, trajectory-aware suppression, and token-level adaptive filtering across diverse decoding modes.
@@ -284,15 +355,15 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
 
 ### 2025
 
-- [DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://arxiv.org/abs/2511.05784)
+- [DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/file/eaa3d3f05ae14240b7a6a250ce6ddcd7-Paper-Conference.pdf)
   - Author(s): Yaxuan Wang, Chris Yuhao Liu, Quan Liu, Jinlong Pang, Wei Wei, Yujia Bao, Yang Liu
   - Date: 2025-11
-  - Venue: -
+  - Venue: ICLR 2026
   - Category: Inference-Time Regulation (`In-Context CoT + Answer`)
   - Evaluated Backbones: Llama-3-8B-Instruct, Mistral-7B-Instruct
   - Summary: Routes detected forget-worthy prompts without retain data through a dedicated Chain-of-Thought guard model that generates stepwise reasoning instructions for safe in-context unlearning and continual updates.
   - Code: -
-- [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://arxiv.org/abs/2512.17911)
+- [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html)
   - Author(s): Hongji Li, Junchi Yao, Manjiang Yu, Priyanka Singh, Xue Li, Di Wang, Lijie Hu
   - Date: 2025-11
   - Venue: CVPR 2026
@@ -300,6 +371,22 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: QvQ-72B-Preview, InternVL2.5-MPO
   - Summary: Introduces RMLLMU-Bench for Reasoning MLLMs alongside R-MUSE, a training-free subspace steering method that suppresses visual-textual CoT leakage while protecting a Reasoning Retain Subspace.
   - Code: -
+- [Bits Leaked per Query: Information-Theoretic Bounds on Adversarial Attacks against LLMs](https://arxiv.org/abs/2510.17000)
+  - Author(s): Masahiro Kaneko, Timothy Baldwin
+  - Date: 2025-10
+  - Venue: NeurIPS 2025 (Spotlight)
+  - Category: Attacks & Auditing (`Answer Tokens + Logits + Thinking Process`)
+  - Evaluated Backbones: DeepSeek-R1, OLMo-2, Llama-4
+  - Summary: Defines leaked bits per query and quantifies how exposing logits or full thinking processes lowers the query complexity of attacks that recover information intended to be removed by unlearning.
+  - Code: -
+- [Reasoning or Retrieval? A Study of Answer Attribution on Large Reasoning Models](https://proceedings.iclr.cc/paper_files/paper/2026/file/a7687987dcbbfe70ff5fb658346585df-Paper-Conference.pdf)
+  - Author(s): Yuhui Wang, Changjiang Li, Guangke Chen, Jiacheng Liang, Ting Wang
+  - Date: 2025-09
+  - Venue: ICLR 2026
+  - Category: Parameter-Update Unlearning (`LRM Retrieval Shortcuts + CoT Reasoning`)
+  - Evaluated Backbones: DeepSeek-R1-Distill, Qwen3
+  - Summary: Combines memory unlearning with reinforcement learning to suppress retrieval shortcuts that compete with chain-of-thought reasoning and improve reasoning-dominant answer attribution.
+  - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ZJUWYH/FARL)
 - [Rethinking Unlearning for Large Reasoning Models](https://openreview.net/forum?id=jyzjeLq7K3)
   - Author(s): Changsheng Wang, Chongyu Fan, Yihua Zhang, Jinghan Jia, Dennis Wei, Parikshit Ram, Nathalie Baracaldo, Sijia Liu
   - Date: 2025-06
@@ -308,7 +395,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-LLaMA-8B, DeepSeek-R1-Distill-Qwen-14B
   - Summary: Workshop formulation exposing persistent sensitive information leakage inside LRM thinking trajectories under conventional LLM unlearning and motivating reasoning-aware representation misdirection.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU)
-- [Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://arxiv.org/abs/2506.12963)
+- [Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://aclanthology.org/2025.emnlp-main.220/)
   - Author(s): Changsheng Wang, Chongyu Fan, Yihua Zhang, Jinghan Jia, Dennis Wei, Parikshit Ram, Nathalie Baracaldo, Sijia Liu
   - Date: 2025-06
   - Venue: EMNLP 2025
@@ -324,14 +411,14 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-2-7B, Mistral-7B
   - Summary: Demonstrates that step-by-step CoT reasoning acts as a black-box backdoor (`Sleek`) to reconstruct superficially erased facts across direct, implied, and indirect multi-step prompts.
   - Code: -
-- [R-TOFU: Unlearning in Large Reasoning Models](https://arxiv.org/abs/2505.15214)
+- [R-TOFU: Unlearning in Large Reasoning Models](https://aclanthology.org/2025.emnlp-main.265/)
   - Author(s): Sangyeon Yoon, Wonje Jeung, Albert No
   - Date: 2025-05
   - Venue: EMNLP 2025
   - Category: Benchmarks & Evaluation / Parameter-Update Unlearning (`CoT + Answer`)
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B, DeepSeek-R1-Distill-Qwen-14B
   - Summary: Establishes the first LRM unlearning benchmark with aligned CoT annotations and step-wise metrics (`CFE`, `AFE`), proposes `Reasoned IDK` preference tuning, and uncovers `ZeroThink`/`LessThink` decoding leakage.
-  - Code: [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu)
+  - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ssangyeon/R-TOFU) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu)
 - [Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps](https://arxiv.org/abs/2502.14829)
   - Author(s): Martin Tutek, Fateme Hashemi Chaleshtori, Ana Marasovic, Yonatan Belinkov
   - Date: 2025-02
@@ -367,6 +454,9 @@ Datasets and suites for trace leakage, answer erasure, multi-hop consistency, mu
 | **STAR-1 Harmful-Intent LRM Split** | Safety & Harmful Rationale Unlearning | Curated harmful-intent prompts with safety-aligned vs. unsafe reasoning traces | Text (Safety CoT + Refusal) | Tests whether LRM unlearning replaces unsafe intermediate rationales with coherent safe-exit trajectories without degenerating. | [[Resource]](https://github.com/zeyu-Yan/GUARD) [[Paper]](https://arxiv.org/abs/2609.21677) |
 | **WMDP + StrongReject / WildJailbreak / JBB-Behaviors** | Hazardous Knowledge & Safety Suites (Adapted to LRMs) | 3,668 bio/cyber/chem MCQs (WMDP) + adversarial safety prompts | Text (CoT Trace + Answer) | Adopted in R2MU to measure hazardous reasoning trace unlearning (`RT-UA`) alongside final answer suppression (`FA-UA`). | [[Resource]](https://github.com/OPTML-Group/Unlearn-R2MU) [[Paper]](https://arxiv.org/abs/2506.12963) |
 | **AIME 2024 / MATH-500 / GPQA Diamond / GSM8K + LIMO** | General Reasoning Preservation & Supervision Suites | Competition math, graduate-level STEM QA, and high-quality CoT supervision triplets | Text (Multi-Step STEM CoT) | Standard utility suites verifying that LRM unlearning does not induce reasoning collapse or degrade test-time scaling competence. | [[Resource]](https://github.com/OPTML-Group/Unlearn-R2MU) [[Paper]](https://arxiv.org/abs/2506.12963) |
+| **ShadowBench / SB-Unlearning** | Latent Association & CoT Leakage Audit | Entity-anonymized shadow prompts with forget / retain controls | Text (CoT + Answer) | Tests whether unlearned models reconstruct forbidden entities from name-free lexical shadow cues and reasoning traces. | [[Resource]](https://huggingface.co/datasets/shadow-bench/SB-unlearning) [[Paper]](https://arxiv.org/abs/2611.15925) |
+| **K-Bench** | Agentic Deployment Unlearning | Six observable ReAct channels across parametric, prompt, and retrieval substrates | Text (Agent CoT + Tools + Retrieval) | Measures whether secrets migrate from final answers or CoT into tool calls, tool observations, retrieval, or summaries while preserving agent usability. | [[Paper]](https://arxiv.org/abs/2609.12808) |
+| **The Unlearning Mirage Dynamic Evaluation** | Dynamic Multi-Hop Recovery Evaluation | Automatically generated single-hop, paraphrase, entity-alias, and multi-hop probes | Text (Multi-Hop Reasoning) | Stress-tests static unlearning claims by constructing probes from pre-unlearning model knowledge and measuring alternate reasoning-path recovery. | [[Resource]](https://sites.google.com/view/unlearningmirage/home) [[Paper]](https://arxiv.org/abs/2603.11266) |
 
 ---
 
@@ -381,6 +471,8 @@ These metrics record four things: leakage inside the reasoning trace, erasure of
 | **CFE (CoT Forgetting Efficacy)** | Step-wise CoT Trace | Aggregates step-level ROUGE recall, step-level cosine similarity, and LLM-as-Judge entailment between generated CoT steps and ground-truth forget facts (higher = stronger trace forgetting). | R-TOFU (Yoon et al., 2025) |
 | **RT-UA / CoT-UA (Reasoning Trace Unlearning Accuracy)** | Full CoT Trajectory | Fraction or judge-scored rate at which intermediate `<think>...</think>` trajectories still disclose sensitive or hazardous forget-set knowledge (lower = better forgetting). | R2MU (Wang et al., 2025); CiPO (Li et al., 2026) |
 | **RIL (Reasoning Information Leakage)** | Multimodal CoT Process | Quantifies residual target entity/attribute disclosure specifically inside intermediate multimodal reasoning steps on RMLLMU-Bench. | R-MUSE (Li et al., 2025) |
+| **LELR (Latent Entity Leakage Rate)** | Name-Free CoT Shadow Prompt | Fraction of anonymized shadow-prompt traces that reconstruct identifying tokens of the forgotten entity; lower indicates deeper latent forgetting. | ShadowBench (Maharjan et al., 2026) |
+| **K-Score** | Agent Deployment Channel Set | Source-specific forgetting score that credits low leakage only when the deployed agent remains usable across CoT, tools, retrieval, answer, and summary channels. | K-Bench (Yu et al., 2026) |
 
 ### Answer-Level Forgetting Metrics
 
@@ -405,6 +497,7 @@ These metrics record four things: leakage inside the reasoning trace, erasure of
 | **MCS & Multi-Granularity MIA** | Cross-Decoding & Trace/Answer Privacy | Multi-Decoding Consistency Score (`MCS`) across sampling/thinking modes paired with Membership Inference Attacks at both CoT-chain and answer levels. | STaR (Zhou et al., 2026) |
 | **Decode-Time Prefill Swap & Teacher-Forced Canary Probe** | Parser-Split Audit Validity | Pairs fixed non-canary thinking prefills with decoding-free teacher-forced continuation scoring to separate true weight memorization from template echo and format drift. | Canary Audit (Li et al., 2026) |
 | **ff-hard & ff-soft (Parametric CoT Faithfulness)** | Individual CoT Step | Measures prediction label flip (`ff-hard`) and target-answer probability drop (`ff-soft`) after unlearning a single CoT step from model parameters. | FUR (Tutek et al., 2025) |
+| **Bits Leaked per Query** | Observable Signal per Attack Query | Mutual information between exposed model signals, including answers, logits, or thinking traces, and successful recovery of a hidden target; lower indicates a more expensive attack surface. | Bits Leaked per Query (Kaneko & Baldwin, 2025) |
 
 ---
 
@@ -428,6 +521,10 @@ Public code and project pages for methods and benchmarks in this list.
   - Step-level CoT unlearning pipeline (`FUR`) and `ff-hard`/`ff-soft` parametric faithfulness evaluators.
 - **[UnStar](https://github.com/MachineUnlearn/UnStar)** (TMLR 2025) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/MachineUnlearn/UnStar)
   - Self-taught anti-sample rationale generation and targeted association unlearning implementation.
+- **[ShadowBench](https://github.com/sujanW0W/ShadowBench)** (NeurIPS 2026) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/sujanW0W/ShadowBench)
+  - Latent association audit implementation and SB-Unlearning shadow-prompt dataset for testing CoT reconstruction after lexical unlearning.
+- **[The Unlearning Mirage](https://sites.google.com/view/unlearningmirage/home)** (COLM 2025) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://sites.google.com/view/unlearningmirage/home)
+  - Dynamic probe-generation package for evaluating multi-hop and alias-based knowledge recovery after LLM unlearning.
 
 ---
 
