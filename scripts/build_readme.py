@@ -93,16 +93,25 @@ def render_readme() -> str:
     )
     lines.append("</p>")
     lines.append("")
-    lines.append(repo["subtitle"])
-    lines.append("")
+    # Opening prose is maintained here. The JSON subtitle is repository metadata and is not printed.
     lines.append(
-        f"As of the latest update, this repository curates **{total_papers}** core papers, "
-        f"**{total_benchmarks}** benchmarks and evaluation suites, **{total_metrics}** LRM-specific evaluation metrics, "
-        f"and **{total_frameworks}** open-source codebases and project portals."
+        "This repository lists papers, benchmarks, evaluation metrics, and code for machine unlearning "
+        "in large reasoning models (LRMs) and chain-of-thought (CoT) reasoning. "
+        "It is a reading list for work on the reasoning trace: "
+        "the steps a model writes before the final answer, often inside `<think>...</think>`."
     )
     lines.append("")
     lines.append(
-        "> **Scope & Contributions:** This list strictly focuses on machine unlearning where **multi-step Chain-of-Thought (CoT) reasoning traces**, **thinking trajectories (`<think>...</think>`)**, or **Large Reasoning Models (LRMs)** are first-class objects of study. If your paper, benchmark, or codebase fits this scope, please open an [Issue](../../issues) or submit a [Pull Request](CONTRIBUTING.md)!"
+        f"The list currently contains **{total_papers}** papers, "
+        f"**{total_benchmarks}** benchmarks and evaluation suites, **{total_metrics}** LRM-specific evaluation metrics, "
+        f"and **{total_frameworks}** codebases and project pages."
+    )
+    lines.append("")
+    lines.append(
+        "> **Scope.** An entry belongs here when multi-step chain-of-thought traces, "
+        "thinking trajectories (`<think>...</think>`), or large reasoning models are central "
+        "to the method or the evaluation. To add a paper, benchmark, or codebase, open an "
+        "[Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md)."
     )
     lines.append("")
 
@@ -128,8 +137,18 @@ def render_readme() -> str:
     lines.append("## Overview: Why LRM & CoT Unlearning?")
     lines.append("")
     lines.append(
-        "Conventional LLM unlearning operates on direct input-output mappings $q \\to a$, optimizing forget and retain losses solely over final answers. "
-        "In contrast, **Large Reasoning Models (LRMs)**—such as OpenAI o1/o3-style models, DeepSeek-R1 and its distilled variants, QwQ, RLVR-trained checkpoints, and Reasoning MLLMs—explicitly generate an intermediate **Chain-of-Thought (CoT)** [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) ([GitHub](https://github.com/jasonwei20/chain-of-thought-prompting)) trajectory $c = [c_1, \\dots, c_T]$ (typically enclosed in `<think>...</think>`) before emitting a final answer $a$:"
+        "Standard LLM unlearning scores a map from a question $q$ to an answer $a$. "
+        "The forget loss and the retain loss are computed on that final answer."
+    )
+    lines.append("")
+    lines.append(
+        "A large reasoning model writes a chain-of-thought before the answer. "
+        "Models in this setting include OpenAI o1/o3-style systems, DeepSeek-R1 and its distilled variants, "
+        "QwQ, RLVR-trained checkpoints, and reasoning multimodal LLMs. "
+        "The trace $c = [c_1, \\dots, c_T]$ is usually wrapped in `<think>...</think>`, and the answer $a$ follows it. "
+        "The prompting setup is the one in [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) "
+        "([GitHub](https://github.com/jasonwei20/chain-of-thought-prompting)). "
+        "Generation then factors as"
     )
     lines.append("")
     lines.append("$$\\pi_{\\theta}(c, a \\mid q) = \\pi_{\\theta}(c \\mid q)\\,\\pi_{\\theta}(a \\mid q, c)$$")
@@ -144,21 +163,34 @@ def render_readme() -> str:
     )
     lines.append("</p>")
     lines.append("")
-    lines.append("Applying answer-centric unlearning to LRMs exposes a fundamental **forgetting–reasoning dilemma**:")
+    lines.append("Methods that edit only the final answer meet three failure modes on these models.")
     lines.append("")
     lines.append(
-        "1. **Residual CoT Leakage:** Erasing or refusing only at the final answer $a$ leaves sensitive, private, or hazardous knowledge intact within intermediate reasoning steps $c$, allowing trivial extraction or answer reconstruction."
+        "1. **Residual CoT leakage.** Deleting or refusing the answer $a$ can leave sensitive, private, or hazardous content inside the trace $c$. The steps themselves are enough to reconstruct it."
     )
     lines.append(
-        "2. **Reasoning Collapse:** Aggressively perturbing weights or hidden representations over long reasoning chains destabilizes multi-step deduction, causes repetitive token loops, suppresses closing `</think>` delimiters, or degrades general STEM reasoning (`AIME`, `MATH-500`, `GPQA`)."
+        "2. **Reasoning collapse.** Large edits to weights or hidden states along a long trace break multi-step deduction. The usual signs are repeated tokens, a missing closing `</think>` tag, and lower accuracy on general STEM sets (`AIME`, `MATH-500`, `GPQA`)."
     )
     lines.append(
-        "3. **Decoding & Reasoning-Path Bypass:** Constrained decoding modes (`ZeroThink`, `LessThink`), multi-hop logical paths, and step-by-step reasoning attacks can resurface superficially suppressed knowledge."
+        "3. **Decoding and reasoning-path bypass.** Constrained decoding (`ZeroThink`, `LessThink`), multi-hop logical paths, and step-by-step prompts can surface knowledge that no longer appears in a normal answer."
     )
     lines.append("")
     lines.append('<p align="center">')
     lines.append('  <img src="figs/taxonomy.png" alt="LRM and CoT Machine Unlearning Framework and Taxonomy" width="100%">')
     lines.append("</p>")
+    lines.append("")
+    lines.append(
+        "Read the figure in two passes. The top row is the problem setting. "
+        "A forget query $q$ enters a target model $\\pi_{\\theta}$. "
+        "The model writes a reasoning trace $c$, then an answer $a$. Unlearning has to cover both. "
+        "The outcome boxes are residual CoT leakage, reasoning collapse, and collapse-free unlearning, "
+        "where the sensitive content is gone and the trace still ends coherently."
+    )
+    lines.append("")
+    lines.append(
+        "The bottom row matches the five tables below, from left to right: parameter updates, inference-time control, "
+        "benchmarks, attacks and audits, and CoT faithfulness. Keywords in each box are examples from that track."
+    )
     lines.append("")
 
     # 4. News
@@ -174,8 +206,9 @@ def render_readme() -> str:
     lines.append("## Papers by Research Taxonomy")
     lines.append("")
     lines.append(
-        "A taxonomy-organized comparison of LRM and CoT machine unlearning literature. "
-        "Works spanning multiple pillars (e.g., introducing both a benchmark and an unlearning algorithm) are cross-referenced with `†`."
+        "Papers are grouped by the question they study. Each paper has one primary track. "
+        "A second row, marked `†`, appears when the same paper also belongs elsewhere, "
+        "for example when it releases both a benchmark and an unlearning algorithm."
     )
     lines.append("")
 
@@ -209,7 +242,8 @@ def render_readme() -> str:
     lines.append("## Papers by Chronological Order")
     lines.append("")
     lines.append(
-        "Complete bibliographic entries sorted in reverse chronological order (`YYYY-MM`)."
+        "Full entries in reverse chronological order (`YYYY-MM`). "
+        "Each entry gives the authors, venue, category, evaluated models, a one-line summary, and a code link when one is public."
     )
     lines.append("")
 
@@ -240,6 +274,10 @@ def render_readme() -> str:
     lines.append("## Benchmarks & Evaluation Suites")
     lines.append("")
     lines.append(
+        "Datasets and suites for trace leakage, answer erasure, multi-hop consistency, multimodal retention, and decoding variants."
+    )
+    lines.append("")
+    lines.append(
         "| **Benchmark / Dataset** | **Category** | **Scale & Splits** | **Modality** | **Evaluation Focus** | **Links** |"
     )
     lines.append("| :--- | :--- | :--- | :---: | :--- | :---: |")
@@ -258,7 +296,8 @@ def render_readme() -> str:
     lines.append("## Evaluation Metrics for LRM & CoT Unlearning")
     lines.append("")
     lines.append(
-        "Unlike standard LLM unlearning, evaluating LRMs requires disentangling **intermediate trace leakage**, **final answer erasure**, **reasoning utility & structural termination**, and **decoding-time robustness**."
+        "These metrics record four things: leakage inside the reasoning trace, erasure of the final answer, "
+        "whether multi-step reasoning still finishes cleanly, and whether a change in decoding brings the forgotten content back."
     )
     lines.append("")
 
@@ -280,6 +319,8 @@ def render_readme() -> str:
     lines.append("")
     lines.append("## Open-Source Frameworks & Portals")
     lines.append("")
+    lines.append("Public code and project pages for methods and benchmarks in this list.")
+    lines.append("")
     for fw in frameworks:
         is_gh = "github.com" in fw["url"]
         badge = (
@@ -287,30 +328,36 @@ def render_readme() -> str:
             if is_gh
             else f"[![Project]({PROJECT_BADGE})]({fw['url']})"
         )
-        lines.append(f"- **[{fw['name']}]({fw['url']})** ({fw['venue']}) — {badge}")
+        lines.append(f"- **[{fw['name']}]({fw['url']})** ({fw['venue']}) {badge}")
         lines.append(f"  - {fw['description']}")
     lines.append("")
 
-    # 10. Contributing, Citation & Star History
+    # 10. Contributing and citation. This list is a collection, so it has no paper citation.
     lines.append("---")
     lines.append("")
     lines.append("## Contributing")
     lines.append("")
     lines.append(
-        "Contributions are warmly welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions or open a paper submission via our [GitHub Issue Template](../../issues/new/choose)."
+        "To add an entry, follow [CONTRIBUTING.md](CONTRIBUTING.md), or open a submission with the "
+        "[issue template](../../issues/new/choose)."
     )
     lines.append("")
-    lines.append("- **Strict Inclusion Criteria:**")
+    lines.append("- **Inclusion criteria:**")
     lines.append(
-        "  1. The work must explicitly investigate machine unlearning, selective forgetting, unlearning attacks/audits, or unlearning benchmarks where **intermediate Chain-of-Thought (CoT) reasoning traces**, **thinking trajectories (`<think>...</think>`)**, or **Large Reasoning Models (LRMs / Reasoning MLLMs / RLVR models)** are central to the problem formulation or evaluation."
+        "  1. The work studies machine unlearning, selective forgetting, an unlearning attack or audit, or an unlearning benchmark, "
+        "and the chain-of-thought trace, the `<think>...</think>` trajectory, or a large reasoning model "
+        "(including reasoning multimodal LLMs and RLVR models) is part of the method or the evaluation."
     )
     lines.append(
-        "  2. General LLM unlearning papers that only target final answers without reasoning-trace intervention, reasoning-level leakage analysis, or LRM evaluation are out of scope (for general LLM unlearning, see [chrisliu298/awesome-llm-unlearning](https://github.com/chrisliu298/awesome-llm-unlearning) and [tamlhp/awesome-machine-unlearning](https://github.com/tamlhp/awesome-machine-unlearning))."
+        "  2. Papers that unlearn only the final answer, with no intervention on the reasoning trace, no leakage analysis of that trace, "
+        "and no LRM evaluation, belong in the general lists "
+        "[chrisliu298/awesome-llm-unlearning](https://github.com/chrisliu298/awesome-llm-unlearning) and "
+        "[tamlhp/awesome-machine-unlearning](https://github.com/tamlhp/awesome-machine-unlearning)."
     )
-    lines.append("- **Quick Update Workflow:**")
+    lines.append("- **Update steps:**")
     lines.append("  ```bash")
     lines.append("  # 1. Add or update entries in data/papers.json or data/benchmarks_metrics.json")
-    lines.append("  # 2. Rebuild README.md and run schema & freshness checks")
+    lines.append("  # 2. Rebuild README.md and check that it matches the data")
     lines.append("  python3 scripts/build_readme.py")
     lines.append("  python3 scripts/validate_data.py --check-readme")
     lines.append("  ```")
@@ -319,18 +366,10 @@ def render_readme() -> str:
     lines.append("## Citation")
     lines.append("")
     lines.append(
-        "This repository is a curated collection and navigation aid for machine unlearning "
-        "in Large Reasoning Models (LRMs) and Chain-of-Thought (CoT) reasoning, not a published paper. "
-        "It does not require a citation of its own. If you find the list useful, please "
-        f"[star the repository](https://github.com/{owner}/{repo_name}). "
-        "When your work depends on a listed result, cite that paper, benchmark, or codebase individually."
-    )
-    lines.append("")
-
-    lines.append("## Star History")
-    lines.append("")
-    lines.append(
-        f"[![Star History Chart](https://api.star-history.com/svg?repos={owner}/{repo_name}&type=Date)](https://star-history.com/#{owner}/{repo_name}&Date)"
+        "This repository is a curated reading list for machine unlearning in large reasoning models "
+        "and chain-of-thought reasoning. There is no paper to cite for the list itself. "
+        f"If the list helps, [star the repository](https://github.com/{owner}/{repo_name}). "
+        "If your work uses a listed result, cite that paper, benchmark, or codebase on its own."
     )
     lines.append("")
 

@@ -6,11 +6,11 @@
   <a href="https://github.com/guts-yang/awesome-lrm-unlearning/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&labelColor=000000" alt="License"></a>
 </p>
 
-A curated collection of papers, benchmarks, datasets, evaluation metrics, and open-source frameworks for Machine Unlearning in Large Reasoning Models (LRMs) and Chain-of-Thought (CoT) Reasoning.
+This repository lists papers, benchmarks, evaluation metrics, and code for machine unlearning in large reasoning models (LRMs) and chain-of-thought (CoT) reasoning. It is a reading list for work on the reasoning trace: the steps a model writes before the final answer, often inside `<think>...</think>`.
 
-As of the latest update, this repository curates **25** core papers, **7** benchmarks and evaluation suites, **12** LRM-specific evaluation metrics, and **8** open-source codebases and project portals.
+The list currently contains **25** papers, **7** benchmarks and evaluation suites, **12** LRM-specific evaluation metrics, and **8** codebases and project pages.
 
-> **Scope & Contributions:** This list strictly focuses on machine unlearning where **multi-step Chain-of-Thought (CoT) reasoning traces**, **thinking trajectories (`<think>...</think>`)**, or **Large Reasoning Models (LRMs)** are first-class objects of study. If your paper, benchmark, or codebase fits this scope, please open an [Issue](../../issues) or submit a [Pull Request](CONTRIBUTING.md)!
+> **Scope.** An entry belongs here when multi-step chain-of-thought traces, thinking trajectories (`<think>...</think>`), or large reasoning models are central to the method or the evaluation. To add a paper, benchmark, or codebase, open an [Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md).
 
 ## Contents
 
@@ -34,7 +34,9 @@ As of the latest update, this repository curates **25** core papers, **7** bench
 
 ## Overview: Why LRM & CoT Unlearning?
 
-Conventional LLM unlearning operates on direct input-output mappings $q \to a$, optimizing forget and retain losses solely over final answers. In contrast, **Large Reasoning Models (LRMs)**—such as OpenAI o1/o3-style models, DeepSeek-R1 and its distilled variants, QwQ, RLVR-trained checkpoints, and Reasoning MLLMs—explicitly generate an intermediate **Chain-of-Thought (CoT)** [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) ([GitHub](https://github.com/jasonwei20/chain-of-thought-prompting)) trajectory $c = [c_1, \dots, c_T]$ (typically enclosed in `<think>...</think>`) before emitting a final answer $a$:
+Standard LLM unlearning scores a map from a question $q$ to an answer $a$. The forget loss and the retain loss are computed on that final answer.
+
+A large reasoning model writes a chain-of-thought before the answer. Models in this setting include OpenAI o1/o3-style systems, DeepSeek-R1 and its distilled variants, QwQ, RLVR-trained checkpoints, and reasoning multimodal LLMs. The trace $c = [c_1, \dots, c_T]$ is usually wrapped in `<think>...</think>`, and the answer $a$ follows it. The prompting setup is the one in [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) ([GitHub](https://github.com/jasonwei20/chain-of-thought-prompting)). Generation then factors as
 
 $$\pi_{\theta}(c, a \mid q) = \pi_{\theta}(c \mid q)\,\pi_{\theta}(a \mid q, c)$$
 
@@ -44,15 +46,19 @@ $$\pi_{\theta}(c, a \mid q) = \pi_{\theta}(c \mid q)\,\pi_{\theta}(a \mid q, c)$
   <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>
 </p>
 
-Applying answer-centric unlearning to LRMs exposes a fundamental **forgetting–reasoning dilemma**:
+Methods that edit only the final answer meet three failure modes on these models.
 
-1. **Residual CoT Leakage:** Erasing or refusing only at the final answer $a$ leaves sensitive, private, or hazardous knowledge intact within intermediate reasoning steps $c$, allowing trivial extraction or answer reconstruction.
-2. **Reasoning Collapse:** Aggressively perturbing weights or hidden representations over long reasoning chains destabilizes multi-step deduction, causes repetitive token loops, suppresses closing `</think>` delimiters, or degrades general STEM reasoning (`AIME`, `MATH-500`, `GPQA`).
-3. **Decoding & Reasoning-Path Bypass:** Constrained decoding modes (`ZeroThink`, `LessThink`), multi-hop logical paths, and step-by-step reasoning attacks can resurface superficially suppressed knowledge.
+1. **Residual CoT leakage.** Deleting or refusing the answer $a$ can leave sensitive, private, or hazardous content inside the trace $c$. The steps themselves are enough to reconstruct it.
+2. **Reasoning collapse.** Large edits to weights or hidden states along a long trace break multi-step deduction. The usual signs are repeated tokens, a missing closing `</think>` tag, and lower accuracy on general STEM sets (`AIME`, `MATH-500`, `GPQA`).
+3. **Decoding and reasoning-path bypass.** Constrained decoding (`ZeroThink`, `LessThink`), multi-hop logical paths, and step-by-step prompts can surface knowledge that no longer appears in a normal answer.
 
 <p align="center">
   <img src="figs/taxonomy.png" alt="LRM and CoT Machine Unlearning Framework and Taxonomy" width="100%">
 </p>
+
+Read the figure in two passes. The top row is the problem setting. A forget query $q$ enters a target model $\pi_{\theta}$. The model writes a reasoning trace $c$, then an answer $a$. Unlearning has to cover both. The outcome boxes are residual CoT leakage, reasoning collapse, and collapse-free unlearning, where the sensitive content is gone and the trace still ends coherently.
+
+The bottom row matches the five tables below, from left to right: parameter updates, inference-time control, benchmarks, attacks and audits, and CoT faithfulness. Keywords in each box are examples from that track.
 
 ## News & Highlights
 
@@ -66,7 +72,7 @@ Applying answer-centric unlearning to LRMs exposes a fundamental **forgetting–
 
 ## Papers by Research Taxonomy
 
-A taxonomy-organized comparison of LRM and CoT machine unlearning literature. Works spanning multiple pillars (e.g., introducing both a benchmark and an unlearning algorithm) are cross-referenced with `†`.
+Papers are grouped by the question they study. Each paper has one primary track. A second row, marked `†`, appears when the same paper also belongs elsewhere, for example when it releases both a benchmark and an unlearning algorithm.
 
 ### 1. Parameter-Update LRM & CoT Unlearning
 
@@ -135,7 +141,7 @@ Mechanistic frameworks that selectively unlearn individual verbalized CoT steps 
 
 ## Papers by Chronological Order
 
-Complete bibliographic entries sorted in reverse chronological order (`YYYY-MM`).
+Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the authors, venue, category, evaluated models, a one-line summary, and a code link when one is public.
 
 ### 2026
 
@@ -350,6 +356,8 @@ Complete bibliographic entries sorted in reverse chronological order (`YYYY-MM`)
 
 ## Benchmarks & Evaluation Suites
 
+Datasets and suites for trace leakage, answer erasure, multi-hop consistency, multimodal retention, and decoding variants.
+
 | **Benchmark / Dataset** | **Category** | **Scale & Splits** | **Modality** | **Evaluation Focus** | **Links** |
 | :--- | :--- | :--- | :---: | :--- | :---: |
 | **R-TOFU (Reasoning-TOFU)** | Dedicated LRM Unlearning | 4,000 QA + Aligned CoTs (200 fictitious authors; forget01 / forget05 / forget10) | Text (CoT + Answer) | Entity privacy unlearning across intermediate CoT steps and final answers, plus ZeroThink/LessThink decoding robustness. | [[Resource]](https://ai-isl.github.io/r-tofu) [[Paper]](https://arxiv.org/abs/2505.15214) |
@@ -364,7 +372,7 @@ Complete bibliographic entries sorted in reverse chronological order (`YYYY-MM`)
 
 ## Evaluation Metrics for LRM & CoT Unlearning
 
-Unlike standard LLM unlearning, evaluating LRMs requires disentangling **intermediate trace leakage**, **final answer erasure**, **reasoning utility & structural termination**, and **decoding-time robustness**.
+These metrics record four things: leakage inside the reasoning trace, erasure of the final answer, whether multi-step reasoning still finishes cleanly, and whether a change in decoding brings the forgotten content back.
 
 ### Reasoning-Trace Forgetting Metrics
 
@@ -402,44 +410,42 @@ Unlike standard LLM unlearning, evaluating LRMs requires disentangling **interme
 
 ## Open-Source Frameworks & Portals
 
-- **[Unlearn-R2MU](https://github.com/OPTML-Group/Unlearn-R2MU)** (EMNLP 2025) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU)
+Public code and project pages for methods and benchmarks in this list.
+
+- **[Unlearn-R2MU](https://github.com/OPTML-Group/Unlearn-R2MU)** (EMNLP 2025) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU)
   - Official codebase for Reasoning-aware Representation Misdirection for Unlearning (`R2MU`) on DeepSeek-R1-Distill models across WMDP and safety/math suites.
-- **[R-TOFU Benchmark Suite](https://ai-isl.github.io/r-tofu)** (EMNLP 2025) — [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu)
+- **[R-TOFU Benchmark Suite](https://ai-isl.github.io/r-tofu)** (EMNLP 2025) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu)
   - Benchmark portal, CoT-annotated fictitious-author splits, step-wise `CFE`/`AFE` evaluators, and `Reasoned IDK` / `ZeroThink` / `LessThink` protocols.
-- **[CiPO](https://github.com/TerryLee77/CiPO)** (ACL 2026) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO)
+- **[CiPO](https://github.com/TerryLee77/CiPO)** (ACL 2026) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO)
   - Counterfactual CoT generator and online iterative SimPO unlearning pipeline evaluated on R-TOFU and real-world RETURN splits.
-- **[REDaCT](https://github.com/jmaccoby/redact)** (Findings of EMNLP 2026) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jmaccoby/redact)
+- **[REDaCT](https://github.com/jmaccoby/redact)** (Findings of EMNLP 2026) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jmaccoby/redact)
   - Collapse-free inference-time sentence-level RoBERTa leak detector and corrective embedding optimization for DeepSeek-R1-Distill LRMs.
-- **[GUARD](https://github.com/zeyu-Yan/GUARD)** (Preprint 2026) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD)
+- **[GUARD](https://github.com/zeyu-Yan/GUARD)** (Preprint 2026) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD)
   - Guided Answer-Reasoning Distillation training pipeline and Natural Forgetting Reasoning Score (`NFRS`) evaluation suite.
-- **[PoRT](https://github.com/ChnIRuI/PoRT_LLM_Unlearning)** (ICLR 2026) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ChnIRuI/PoRT_LLM_Unlearning)
+- **[PoRT](https://github.com/ChnIRuI/PoRT_LLM_Unlearning)** (ICLR 2026) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ChnIRuI/PoRT_LLM_Unlearning)
   - Post-judgment and selective multi-round thinking (`SMT`) framework for attack-resilient inference-time unlearning.
-- **[Parametric-Faithfulness (FUR)](https://github.com/technion-cs-nlp/parametric-faithfulness)** (EMNLP 2025) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/technion-cs-nlp/parametric-faithfulness)
+- **[Parametric-Faithfulness (FUR)](https://github.com/technion-cs-nlp/parametric-faithfulness)** (EMNLP 2025) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/technion-cs-nlp/parametric-faithfulness)
   - Step-level CoT unlearning pipeline (`FUR`) and `ff-hard`/`ff-soft` parametric faithfulness evaluators.
-- **[UnStar](https://github.com/MachineUnlearn/UnStar)** (TMLR 2025) — [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/MachineUnlearn/UnStar)
+- **[UnStar](https://github.com/MachineUnlearn/UnStar)** (TMLR 2025) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/MachineUnlearn/UnStar)
   - Self-taught anti-sample rationale generation and targeted association unlearning implementation.
 
 ---
 
 ## Contributing
 
-Contributions are warmly welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions or open a paper submission via our [GitHub Issue Template](../../issues/new/choose).
+To add an entry, follow [CONTRIBUTING.md](CONTRIBUTING.md), or open a submission with the [issue template](../../issues/new/choose).
 
-- **Strict Inclusion Criteria:**
-  1. The work must explicitly investigate machine unlearning, selective forgetting, unlearning attacks/audits, or unlearning benchmarks where **intermediate Chain-of-Thought (CoT) reasoning traces**, **thinking trajectories (`<think>...</think>`)**, or **Large Reasoning Models (LRMs / Reasoning MLLMs / RLVR models)** are central to the problem formulation or evaluation.
-  2. General LLM unlearning papers that only target final answers without reasoning-trace intervention, reasoning-level leakage analysis, or LRM evaluation are out of scope (for general LLM unlearning, see [chrisliu298/awesome-llm-unlearning](https://github.com/chrisliu298/awesome-llm-unlearning) and [tamlhp/awesome-machine-unlearning](https://github.com/tamlhp/awesome-machine-unlearning)).
-- **Quick Update Workflow:**
+- **Inclusion criteria:**
+  1. The work studies machine unlearning, selective forgetting, an unlearning attack or audit, or an unlearning benchmark, and the chain-of-thought trace, the `<think>...</think>` trajectory, or a large reasoning model (including reasoning multimodal LLMs and RLVR models) is part of the method or the evaluation.
+  2. Papers that unlearn only the final answer, with no intervention on the reasoning trace, no leakage analysis of that trace, and no LRM evaluation, belong in the general lists [chrisliu298/awesome-llm-unlearning](https://github.com/chrisliu298/awesome-llm-unlearning) and [tamlhp/awesome-machine-unlearning](https://github.com/tamlhp/awesome-machine-unlearning).
+- **Update steps:**
   ```bash
   # 1. Add or update entries in data/papers.json or data/benchmarks_metrics.json
-  # 2. Rebuild README.md and run schema & freshness checks
+  # 2. Rebuild README.md and check that it matches the data
   python3 scripts/build_readme.py
   python3 scripts/validate_data.py --check-readme
   ```
 
 ## Citation
 
-This repository is a curated collection and navigation aid for machine unlearning in Large Reasoning Models (LRMs) and Chain-of-Thought (CoT) reasoning, not a published paper. It does not require a citation of its own. If you find the list useful, please [star the repository](https://github.com/guts-yang/awesome-lrm-unlearning). When your work depends on a listed result, cite that paper, benchmark, or codebase individually.
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=guts-yang/awesome-lrm-unlearning&type=Date)](https://star-history.com/#guts-yang/awesome-lrm-unlearning&Date)
+This repository is a curated reading list for machine unlearning in large reasoning models and chain-of-thought reasoning. There is no paper to cite for the list itself. If the list helps, [star the repository](https://github.com/guts-yang/awesome-lrm-unlearning). If your work uses a listed result, cite that paper, benchmark, or codebase on its own.
