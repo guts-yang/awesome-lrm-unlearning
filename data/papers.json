@@ -40,7 +40,7 @@
   "news": [
     {
       "date": "2026-11",
-      "content": "Initial release of **Awesome LRM Unlearning**, unifying taxonomy-structured comparisons, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics."
+      "content": "Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics."
     },
     {
       "date": "2026-10",

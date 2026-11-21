@@ -62,7 +62,7 @@ The bottom row matches the five tables below, from left to right: parameter upda
 
 ## News & Highlights
 
-- **`[2026-11]`** Initial release of **Awesome LRM Unlearning**, unifying taxonomy-structured comparisons, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics.
+- **`[2026-11]`** Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics.
 - **`[2026-10]`** **REDaCT** (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces.
 - **`[2026-09]`** **GUARD** proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`).
 - **`[2026-07]`** **CiPO** (*ACL 2026*) formulates causal counterfactual CoT preference optimization for LRMs; **R-MUSE / RMLLMU-Bench** (*CVPR 2026*) extends reasoning-preserving unlearning to Multimodal LRMs.
