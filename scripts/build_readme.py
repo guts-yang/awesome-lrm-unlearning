@@ -136,7 +136,7 @@ def render_readme() -> str:
     lines.append("")
     lines.append('<p align="center">')
     lines.append(
-        '  <img src="figs/cot_prompting_figure1.png" alt="Original Chain-of-Thought Prompting Figure 1" width="90%">'
+        '  <img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="90%">'
     )
     lines.append("  <br>")
     lines.append(
