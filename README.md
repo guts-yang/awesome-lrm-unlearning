@@ -43,7 +43,7 @@ $$\pi_{\theta}(c, a \mid q) = \pi_{\theta}(c \mid q)\,\pi_{\theta}(a \mid q, c)$
 
 <table align="center"><tr>
   <td align="center" valign="top" width="50%">
-    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>
+    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot-prompting-figure-1.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>
     <br>
     <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>
   </td>

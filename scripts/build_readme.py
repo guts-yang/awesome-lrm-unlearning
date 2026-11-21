@@ -217,7 +217,7 @@ def render_readme() -> str:
     lines.append('<table align="center"><tr>')
     lines.append("  <td align=\"center\" valign=\"top\" width=\"50%\">")
     lines.append(
-        '    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot_prompting_comparison.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>'
+        '    <a href="https://arxiv.org/abs/2201.11903"><img src="figs/cot-prompting-figure-1.png" alt="Comparison of Standard Prompting and Chain-of-Thought Prompting" width="100%"></a>'
     )
     lines.append("    <br>")
     lines.append(
