@@ -1,0 +1,86 @@
+name: Discover Papers
+
+on:
+  schedule:
+    - cron: "0 1 * * 5"
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: Number of days to search back
+        required: false
+        default: "14"
+      dry_run:
+        description: Report only and do not open a pull request
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    name: Discover and propose papers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Discover papers
+        id: discover
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '14' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -eu
+          extra=""
+          if [ -z "${DEEPSEEK_API_KEY}" ] || [ "${DRY_RUN}" = "true" ]; then
+            extra="--report-only"
+          fi
+          python3 scripts/discover_papers.py --lookback-days "${LOOKBACK_DAYS}" ${extra}
+          python3 scripts/validate_data.py --check-readme
+
+      - name: Upload discovery report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-discovery-report
+          path: artifacts/
+          if-no-files-found: warn
+
+      - name: Open or update review pull request
+        if: steps.discover.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin auto/paper-discovery || true
+          git checkout -B auto/paper-discovery
+          git add data/papers.json data/seen_candidates.json README.md
+          git commit -m "Add newly discovered LRM and CoT unlearning papers"
+          if git ls-remote --exit-code --heads origin auto/paper-discovery >/dev/null; then
+            git push --force origin HEAD:auto/paper-discovery
+          else
+            git push origin HEAD:auto/paper-discovery
+          fi
+          body="Automated paper discovery proposed new entries."
+          if [ -f artifacts/pr-body.md ]; then
+            body=$(cat artifacts/pr-body.md)
+          fi
+          existing=$(gh pr list --repo "$GITHUB_REPOSITORY" --head auto/paper-discovery --base main --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ] && [ "$existing" != "null" ]; then
+            gh pr edit "$existing" --repo "$GITHUB_REPOSITORY" --title "Discover LRM and CoT unlearning papers" --body "$body"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head auto/paper-discovery --title "Discover LRM and CoT unlearning papers" --body "$body"
+          fi

@@ -19,7 +19,10 @@ from build_readme import (
 )
 
 DATE_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+DAY_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$")
 URL_RE = re.compile(r"^https://\S+$")
+SEEN_PATH = ROOT / "data" / "seen_candidates.json"
+SEEN_STATUSES = {"reported", "accepted", "rejected"}
 
 REQUIRED_PAPER_FIELDS = {
     "id",
@@ -40,6 +43,63 @@ REQUIRED_PAPER_FIELDS = {
     "models",
     "summary",
 }
+
+
+def validate_seen_candidates(errors: list[str]) -> None:
+    if not SEEN_PATH.exists():
+        errors.append(f"Missing file: {SEEN_PATH}")
+        return
+    try:
+        payload = json.loads(SEEN_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"[seen_candidates] Invalid JSON: {exc}")
+        return
+    candidates = payload.get("candidates") if isinstance(payload, dict) else None
+    if not isinstance(candidates, list):
+        errors.append("[seen_candidates] Expected an object with a candidates list.")
+        return
+
+    seen_arxiv: set[str] = set()
+    seen_doi: set[str] = set()
+    seen_titles: set[str] = set()
+    for idx, item in enumerate(candidates):
+        label = f"[seen_candidates:{idx}]"
+        if not isinstance(item, dict):
+            errors.append(f"{label} Candidate must be an object.")
+            continue
+        title = item.get("normalized_title")
+        if not isinstance(title, str) or not title.strip():
+            errors.append(f"{label} normalized_title must be a non-empty string.")
+        elif title in seen_titles:
+            errors.append(f"{label} Duplicate normalized_title: {title}")
+        else:
+            seen_titles.add(title)
+        status = item.get("status")
+        if status not in SEEN_STATUSES:
+            errors.append(f"{label} Invalid status: {status}")
+        for day_key in ("first_seen", "last_seen"):
+            day = item.get(day_key)
+            if not isinstance(day, str) or not DAY_RE.match(day):
+                errors.append(f"{label} Invalid {day_key}: {day}")
+        arxiv_id = item.get("arxiv_id")
+        if arxiv_id is not None:
+            if not isinstance(arxiv_id, str) or not arxiv_id.strip():
+                errors.append(f"{label} arxiv_id must be a non-empty string or null.")
+            elif arxiv_id in seen_arxiv:
+                errors.append(f"{label} Duplicate arxiv_id: {arxiv_id}")
+            else:
+                seen_arxiv.add(arxiv_id)
+        doi = item.get("doi")
+        if doi is not None:
+            if not isinstance(doi, str) or not doi.strip():
+                errors.append(f"{label} doi must be a non-empty string or null.")
+            elif doi.lower() in seen_doi:
+                errors.append(f"{label} Duplicate doi: {doi}")
+            else:
+                seen_doi.add(doi.lower())
+        paper_url = item.get("paper_url")
+        if paper_url is not None and (not isinstance(paper_url, str) or not URL_RE.match(paper_url)):
+            errors.append(f"{label} Invalid paper_url: {paper_url}")
 
 
 def validate_all(check_readme: bool = False) -> list[str]:
@@ -141,6 +201,8 @@ def validate_all(check_readme: bool = False) -> list[str]:
             )
         if not URL_RE.match(fw.get("url", "")):
             errors.append(f"[Framework:{fw.get('name')}] Invalid url: {fw.get('url')}")
+
+    validate_seen_candidates(errors)
 
     # Validate the README taxonomy figure
     figure_path = ROOT / "figs" / "taxonomy.png"
