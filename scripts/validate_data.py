@@ -14,8 +14,8 @@ from build_readme import (
     PAPERS_PATH,
     README_PATH,
     ROOT,
+    collect_readme_anchors,
     render_readme,
-    slugify_heading,
 )
 
 DATE_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
@@ -162,14 +162,11 @@ def validate_all(check_readme: bool = False) -> list[str]:
                     "Run `python3 scripts/build_readme.py` to regenerate."
                 )
 
-            # Verify all internal markdown anchor links resolve to real headings
-            heading_anchors = {
-                slugify_heading(m.group(1).strip())
-                for m in re.finditer(r"^#{1,6}\s+(.+)$", actual, flags=re.MULTILINE)
-            }
+            # Heading slugs and explicit HTML ids are both valid jump targets.
+            readme_anchors = collect_readme_anchors(actual)
             for link_match in re.finditer(r"\]\(#([^)]+)\)", actual):
                 anchor = link_match.group(1)
-                if anchor not in heading_anchors:
+                if anchor not in readme_anchors:
                     errors.append(f"Broken internal README anchor link: #{anchor}")
 
     return errors

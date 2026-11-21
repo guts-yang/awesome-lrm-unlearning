@@ -62,12 +62,12 @@ The bottom row matches the five tables below, from left to right: parameter upda
 
 ## News & Highlights
 
-- **`[2026-11-21]`** Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works; refreshed formal venue and code links.
-- **`[2026-11]`** Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics.
-- **`[2026-10]`** **REDaCT** (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces.
-- **`[2026-09]`** **GUARD** proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`).
-- **`[2026-07]`** **CiPO** (*ACL 2026*) formulates causal counterfactual CoT preference optimization for LRMs; **R-MUSE / RMLLMU-Bench** (*CVPR 2026*) extends reasoning-preserving unlearning to Multimodal LRMs.
-- **`[2025-11]`** Landmark *EMNLP 2025* trio establishes the sub-field: **R-TOFU** (first LRM unlearning benchmark + `Reasoned IDK`), **R2MU** (reasoning-aware representation misdirection), and **FUR** (parametric CoT faithfulness via step unlearning).
+- **`[2026-11-21]`** Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: [added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works](#papers-by-chronological-order); refreshed formal venue and code links.
+- **`[2026-11]`** Initial repository release, with a [taxonomy-structured reading list](#papers-by-research-taxonomy), [chronological tracking](#papers-by-chronological-order), [LRM-specific benchmarks](#benchmarks--evaluation-suites), and [CoT evaluation metrics](#evaluation-metrics-for-lrm--cot-unlearning).
+- **`[2026-10]`** [**REDaCT**](#paper-maccoby2026redact) (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces.
+- **`[2026-09]`** [**GUARD**](#paper-yan2026guard) proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`).
+- **`[2026-07]`** [**CiPO**](#paper-li2026cipo) (*ACL 2026*) formulates causal counterfactual CoT preference optimization for LRMs; [**R-MUSE / RMLLMU-Bench**](#paper-li2025rmuse) (*CVPR 2026*) extends reasoning-preserving unlearning to Multimodal LRMs.
+- **`[2025-11]`** Landmark *EMNLP 2025* trio establishes the sub-field: [**R-TOFU**](#paper-yoon2025rtofu) (first LRM unlearning benchmark + `Reasoned IDK`), [**R2MU**](#paper-wang2025r2mu) (reasoning-aware representation misdirection), and [**FUR**](#paper-tutek2025fur) (parametric CoT faithfulness via step unlearning).
 
 ---
 
@@ -160,7 +160,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
 
 ### 2026
 
-- [ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models](https://arxiv.org/abs/2611.15925)
+- <a id="paper-maharjan2026shadowbench"></a>[ShadowBench: Exposing Lexical Anchoring and the Illusion of Forgetting in Large Language Models](https://arxiv.org/abs/2611.15925)
   - Author(s): Sujan Maharjan, Lu Liu
   - Date: 2026-11
   - Venue: NeurIPS 2026
@@ -168,7 +168,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Qwen3-8B, Llama-3-8B-Instruct
   - Summary: Defines the Latent Entity Leakage Rate (`LELR`) on name-free shadow prompts and shows that gradient-difference and NPO unlearning on Qwen3-8B still reconstruct the forbidden entity inside the reasoning trace.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/sujanW0W/ShadowBench)
-- [Reasoning-Aware Cross-Modal Association Unlearning in Multimodal Large Reasoning Models](https://arxiv.org/abs/2611.06168)
+- <a id="paper-li2026vkcr"></a>[Reasoning-Aware Cross-Modal Association Unlearning in Multimodal Large Reasoning Models](https://arxiv.org/abs/2611.06168)
   - Author(s): Xinghao Li, Chenchen Tan, Youyang Qu, Shujie Cui, Xingliang Yuan, Cunjian Chen, Chi Liu, Longxiang Gao
   - Date: 2026-11
   - Venue: -
@@ -176,7 +176,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: R1-Onevision-7B-RL, Qwen2.5-VL-3B-Instruct, LLaVA-1.5-7B
   - Summary: Localizes a parameter edit to a designated visual-to-knowledge association and counterfactually rebinds intermediate reasoning, introducing CLEAR-R and MLLMU-R to measure reasoning leakage, hallucinated reassociation, and retained multimodal reasoning.
   - Code: -
-- [REDaCT: Collapse-Free Unlearning in Large Reasoning Models](https://arxiv.org/abs/2610.12769)
+- <a id="paper-maccoby2026redact"></a>[REDaCT: Collapse-Free Unlearning in Large Reasoning Models](https://arxiv.org/abs/2610.12769)
   - Author(s): Joshua Maccoby, Wendy Hui Wang
   - Date: 2026-10
   - Venue: Findings of EMNLP 2026
@@ -184,7 +184,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Detects forget-set leaks sentence-by-sentence inside CoT traces and injects an offline-learned corrective embedding to regenerate safe continuations with zero reasoning collapse.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jmaccoby/redact)
-- [Mitigating Private Data Leakage in LLMs with Whiteout](https://arxiv.org/abs/2610.02418)
+- <a id="paper-ha2026whiteout"></a>[Mitigating Private Data Leakage in LLMs with Whiteout](https://arxiv.org/abs/2610.02418)
   - Author(s): Anna Yoo Jeong Ha, Ronik Bhaskar, Haitao Zheng, Ben Y. Zhao
   - Date: 2026-10
   - Venue: -
@@ -192,7 +192,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-7B, Phi-4-16B, GPT-OSS-20B
   - Summary: Uses precise camouflage-data overwriting for private user-attribute associations and adds synthetic reasoning steps for reasoning models to suppress leakage while preserving reasoning utility.
   - Code: -
-- [K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments](https://arxiv.org/abs/2609.12808)
+- <a id="paper-yu2026kbench"></a>[K-Bench: A Benchmark for LLM Unlearning in Agentic Deployments](https://arxiv.org/abs/2609.12808)
   - Author(s): Guangsheng Yu, Yanna Jiang, Qin Wang, Baihe Ma, Xu Wang
   - Date: 2026-09
   - Venue: -
@@ -200,7 +200,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3.1-8B, Mistral-7B, Qwen3
   - Summary: Evaluates deployed ReAct agents across six observable channels and shows that suppressing final answers or CoT alone can leave secrets recoverable through tools, observations, retrieval, or summaries.
   - Code: -
-- [GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://aclanthology.org/2026.emnlp-main.2334/)
+- <a id="paper-yan2026guard"></a>[GUARD: Natural Forgetting in Large Reasoning Models via Guided Answer-Reasoning Distillation](https://aclanthology.org/2026.emnlp-main.2334/)
   - Author(s): Zeyu Yan, Guanghao Zhou, Minghui Qiu, Ming Gao, Cen Chen
   - Date: 2026-09
   - Venue: EMNLP 2026 Main
@@ -208,7 +208,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Converts unsafe or private CoT disclosures into natural safe-exit trajectories via guidance tokens and distills them into model parameters alongside the NFRS replacement-quality metric.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/zeyu-Yan/GUARD)
-- [Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths](https://arxiv.org/abs/2609.34442)
+- <a id="paper-wang2026dumic"></a>[Making LLMs Truly Forget: Deep Unlearning by Searching, Selecting, and Severing Knowledge Paths](https://arxiv.org/abs/2609.34442)
   - Author(s): Jialu Wang, Peizhi Niu, Haoteng Yin, Hans Hao-Hsun Hsu, Pan Li
   - Date: 2026-09
   - Venue: -
@@ -216,7 +216,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Qwen3.5-27B, Gemma4-31B-Base
   - Summary: Searches explicit and latent model-supported reasoning paths and applies confidence-aware minimum cuts to sever multi-hop recovery routes while preserving unrelated knowledge.
   - Code: -
-- [Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets](https://arxiv.org/abs/2609.38909)
+- <a id="paper-tang2026pact"></a>[Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets](https://arxiv.org/abs/2609.38909)
   - Author(s): Haoran Tang, Rajiv Khanna
   - Date: 2026-09
   - Venue: -
@@ -224,7 +224,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Qwen-32B, QwQ-32B
   - Summary: Builds contrastive forget units from realized deceptions and trains pressure-aware counterfactual reasoning targets that remove deceptive behavior while preserving context use and monitorable CoT traces.
   - Code: -
-- [Trajectory Unlearning on LLM-based Agents](https://arxiv.org/abs/2609.33639)
+- <a id="paper-shi2026trajectory"></a>[Trajectory Unlearning on LLM-based Agents](https://arxiv.org/abs/2609.33639)
   - Author(s): Yingdan Shi, Ren Wang
   - Date: 2026-09
   - Venue: -
@@ -232,7 +232,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Qwen2.5-3B-Instruct, Qwen2.5-7B-Instruct
   - Summary: Defines trajectory-level unlearning for long-horizon agents and uses Group-injected Relative Policy Optimization to penalize undesired reasoning-action trajectories while preserving task utility.
   - Code: -
-- [FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA](https://arxiv.org/abs/2609.26814)
+- <a id="paper-lu2026fedcotvqa"></a>[FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA](https://arxiv.org/abs/2609.26814)
   - Author(s): Rui Lu, Tao Ling, Dan Wang, Qing Li
   - Date: 2026-09
   - Venue: -
@@ -240,7 +240,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: CoT Planner for VideoQA
   - Summary: Introduces planner-side partitioning, deletion-ready aggregation, and residual unlearning to remove client influence from both federated parameters and CoT planner reasoning-trace behavior without full retraining.
   - Code: -
-- [Test-Time Unlearning via Sparse Autoencoder](https://arxiv.org/abs/2609.16229)
+- <a id="paper-li2026aria"></a>[Test-Time Unlearning via Sparse Autoencoder](https://arxiv.org/abs/2609.16229)
   - Author(s): Pingzhi Li, Jinhao Duan, Vaishnav Tadiparthi, Nakul Agarwal, Kwonjoon Lee, Ehsan Moradi Pari, Hossein Nourkhiz Mahjoub, Sijia Liu, Tianlong Chen
   - Date: 2026-09
   - Venue: -
@@ -248,7 +248,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Qwen-1.5B, Gemma-3-1B-it
   - Summary: Freezes model weights and gates generation with a sparse-autoencoder forget detector, intervening only on triggered states so R-TOFU answers and intermediate CoT traces are suppressed together (`AFE`, `CFE`).
   - Code: -
-- [LEMUR: Latent Entropy-aware Multimodal Unlearning via Visual-anchored Reasoning Redirection](https://arxiv.org/abs/2608.11691)
+- <a id="paper-zhong2026lemur"></a>[LEMUR: Latent Entropy-aware Multimodal Unlearning via Visual-anchored Reasoning Redirection](https://arxiv.org/abs/2608.11691)
   - Author(s): Xinhao Zhong, Yuxia Qiao, Junhao Li, Hao Fang, Yi Sun, Bin Chen
   - Date: 2026-08
   - Venue: -
@@ -256,7 +256,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: R1-Onevision-7B, Vision-R1-7B
   - Summary: Uses token-level entropy and forbidden-token mass to delimit sensitive spans inside RL-trained multimodal reasoning traces, then redirects those spans with visual-anchor latent injection while leaving weights frozen.
   - Code: -
-- [Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://aclanthology.org/2026.findings-emnlp.2004/)
+- <a id="paper-qian2026leakresistant"></a>[Leak-Resistant Unlearning: A New Benchmark for Evaluating Multi-Hop Reasoning Consistency and Recovery Robustness](https://aclanthology.org/2026.findings-emnlp.2004/)
   - Author(s): Haoting Qian, Qingjie Zhang, Zhicong Huang, Cheng Hong, Han Qiu
   - Date: 2026-08
   - Venue: Findings of EMNLP 2026
@@ -264,7 +264,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3-8B, Qwen2.5-7B, Mistral-7B
   - Summary: Evaluates whether unlearned knowledge remains recoverable across six logic-guided multi-hop reasoning structures combined with prompt-level and parameter-level recovery attacks.
   - Code: [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://leak-resistant.site)
-- [Disentangling the Effects of Unlearning in Measuring Parametric Faithfulness of Chain-of-Thought](https://aclanthology.org/2026.acl-srw.36/)
+- <a id="paper-mitsuhashi2026deltacot"></a>[Disentangling the Effects of Unlearning in Measuring Parametric Faithfulness of Chain-of-Thought](https://aclanthology.org/2026.acl-srw.36/)
   - Author(s): Ryo Mitsuhashi, Gaku Morio, Ayana Niwa, Masahiro Kaneko, Kentaro Inui, Terufumi Morishita, Yuta Koreeda, Yasuhiro Sogawa
   - Date: 2026-07
   - Venue: ACL 2026 Student Research Workshop
@@ -272,7 +272,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3-8B, Llama-3-70B, Llama-3.2-3B
   - Summary: Adds irrelevant-step and word-shuffle controls on top of step-level CoT unlearning, and defines `ΔIS` and `ΔWS` so parametric faithfulness scores subtract artifacts of the unlearning update itself.
   - Code: -
-- [Mechanism-Guided Selective Unlearning for RLVR-Induced Reasoning](https://arxiv.org/abs/2606.19222)
+- <a id="paper-zhou2026mast"></a>[Mechanism-Guided Selective Unlearning for RLVR-Induced Reasoning](https://arxiv.org/abs/2606.19222)
   - Author(s): Chenyu Zhou, Qiliang Jiang, Shuning Wu, Xu Zhou
   - Date: 2026-06
   - Venue: -
@@ -280,7 +280,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Qwen2.5-Math-1.5B, Qwen3-1.7B-Base
   - Summary: Identifies directional mismatch between SFT and RLVR reasoning updates, ranking attention-projection tensors by off-principal energy and forget-gradient coupling to unlearn target math reasoning without collapsing retain skills.
   - Code: -
-- [Auditing Reasoning-Trace Memorization Claims after Unlearning with Head-Conditioned Canaries](https://arxiv.org/abs/2605.18891)
+- <a id="paper-li2026canaryaudit"></a>[Auditing Reasoning-Trace Memorization Claims after Unlearning with Head-Conditioned Canaries](https://arxiv.org/abs/2605.18891)
   - Author(s): Yanhang Li, Zhichao Fan, Zexin Zhuang
   - Date: 2026-05
   - Venue: -
@@ -288,7 +288,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Qwen-7B, DeepSeek-R1-Distill-Llama-8B
   - Summary: Audits the parser-split CoT bypass gap on distilled LRMs using six-token canary heads, showing static tag-splitting conflates weight retention with template echo and format drift, and proposes decode-time prefill swaps plus teacher-forced scoring.
   - Code: -
-- [CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://aclanthology.org/2026.acl-long.143/)
+- <a id="paper-li2026cipo"></a>[CiPO: Counterfactual Unlearning for Large Reasoning Models through Iterative Preference Optimization](https://aclanthology.org/2026.acl-long.143/)
   - Author(s): Junyi Li, Yongqiang Chen, Ningning Ding
   - Date: 2026-04
   - Venue: ACL 2026
@@ -296,7 +296,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B
   - Summary: Formulates LRM unlearning via a causal graph and iteratively pairs self-generated counterfactual CoT-answer trajectories against online-sampled leaking traces using reference-free SimPO.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/TerryLee77/CiPO)
-- [Selective Forgetting for Large Reasoning Models](https://doi.org/10.1007/978-981-92-1468-6_28)
+- <a id="paper-le2026selective"></a>[Selective Forgetting for Large Reasoning Models](https://doi.org/10.1007/978-981-92-1468-6_28)
   - Author(s): Tuan Le, Wei Qian, Mengdi Huai
   - Date: 2026-04
   - Venue: PAKDD 2026
@@ -304,7 +304,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Uses RAG-assisted multi-LLM analysis to pinpoint forget-relevant segments within CoT traces, replacing them with logically consistent benign placeholders under a feature-replacement unlearning loss.
   - Code: -
-- [Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://doi.org/10.1007/978-981-92-1468-6_36)
+- <a id="paper-chen2026vulnerabilities"></a>[Towards Unveiling Vulnerabilities of Large Reasoning Models in Machine Unlearning](https://doi.org/10.1007/978-981-92-1468-6_36)
   - Author(s): Aobo Chen, Chenxu Zhao, Chenglin Miao, Mengdi Huai
   - Date: 2026-04
   - Venue: PAKDD 2026
@@ -312,7 +312,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Introduces white-box and black-box bi-level malicious unlearning requests that force unlearned LRMs to output incorrect answers supported by coherent, deceptive reasoning traces.
   - Code: -
-- [The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning](https://arxiv.org/abs/2603.11266)
+- <a id="paper-shah2026mirage"></a>[The Unlearning Mirage: A Dynamic Framework for Evaluating LLM Unlearning](https://arxiv.org/abs/2603.11266)
   - Author(s): Raj Sanjay Shah, Jing Huang, Keerthiram Murugesan, Nathalie Baracaldo, Diyi Yang
   - Date: 2026-03
   - Venue: COLM 2025
@@ -320,7 +320,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3-8B, Mistral-7B
   - Summary: Dynamically generates semantically equivalent and multi-hop probes from pre-unlearning knowledge to expose recovery paths missed by static answer-level unlearning benchmarks.
   - Code: [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://sites.google.com/view/unlearningmirage/home)
-- [Explainable LLM Unlearning Through Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/1e97fb8a7c9737e9e9f4e0389b25efe8-Abstract-Conference.html)
+- <a id="paper-liao2026tru"></a>[Explainable LLM Unlearning Through Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/1e97fb8a7c9737e9e9f4e0389b25efe8-Abstract-Conference.html)
   - Author(s): Junfeng Liao, Qizhou Wang, Shanshan Ye, Xin Yu, Ling Chen, Zhen Fang
   - Date: 2026-03
   - Venue: ICLR 2026
@@ -328,7 +328,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3-8B-Instruct, Qwen2.5-7B-Instruct
   - Summary: Constructs explicit reasoning-based unlearning targets specifying both unlearning scope and post-unlearning behavior, combining supervised reasoning loss with gradient ascent for explainable and attack-resilient forgetting.
   - Code: -
-- [Harmonizing Supervised Fine-Tuning and Reinforcement Learning with Reward-Based Sampling for Continual Machine Unlearning](https://doi.org/10.3390/electronics15040771)
+- <a id="paper-lang2026srrs"></a>[Harmonizing Supervised Fine-Tuning and Reinforcement Learning with Reward-Based Sampling for Continual Machine Unlearning](https://doi.org/10.3390/electronics15040771)
   - Author(s): Jiaqi Lang, Jiahao Zhao, Linjing Li, Daniel Dajun Zeng
   - Date: 2026-02
   - Venue: Electronics 2026
@@ -336,7 +336,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, Qwen3-4B-Instruct
   - Summary: Routes continual forget samples between gradient-ascent SFT and GRPO by reward. On ten sequential R-TOFU tasks with DeepSeek-R1-Distill-Llama-8B, forgetting is scored with answer-level Model Utility (`MU`) and Forgetting Efficacy (`FE`) over full generations.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/Langjiaqi/SRRS)
-- [STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://ojs.aaai.org/index.php/AAAI/article/download/40818/44779)
+- <a id="paper-zhou2026star"></a>[STaR: Sensitive Trajectory Regulation for Unlearning in Large Reasoning Models](https://ojs.aaai.org/index.php/AAAI/article/download/40818/44779)
   - Author(s): Jingjing Zhou, Gaoxiang Cong, Li Su, Liang Li
   - Date: 2026-01
   - Venue: AAAI 2026
@@ -344,7 +344,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B
   - Summary: Parameter-free inference-time framework combining semantic sensitivity detection, global safety prompt prefixes, trajectory-aware suppression, and token-level adaptive filtering across diverse decoding modes.
   - Code: -
-- [Robust LLM Unlearning via Post Judgment and Multi-round Thinking](https://openreview.net/forum?id=GBTUVO9vkj)
+- <a id="paper-chen2026port"></a>[Robust LLM Unlearning via Post Judgment and Multi-round Thinking](https://openreview.net/forum?id=GBTUVO9vkj)
   - Author(s): Xinrui Chen, Xu Cao, Jianhao Zhang, Pinlong Zhao, Di Gao, Ou Wu
   - Date: 2026-01
   - Venue: ICLR 2026
@@ -355,7 +355,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
 
 ### 2025
 
-- [DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/file/eaa3d3f05ae14240b7a6a250ce6ddcd7-Paper-Conference.pdf)
+- <a id="paper-wang2025dragon"></a>[DRAGON: Guard LLM Unlearning in Context via Negative Detection and Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/file/eaa3d3f05ae14240b7a6a250ce6ddcd7-Paper-Conference.pdf)
   - Author(s): Yaxuan Wang, Chris Yuhao Liu, Quan Liu, Jinlong Pang, Wei Wei, Yujia Bao, Yang Liu
   - Date: 2025-11
   - Venue: ICLR 2026
@@ -363,7 +363,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-3-8B-Instruct, Mistral-7B-Instruct
   - Summary: Routes detected forget-worthy prompts without retain data through a dedicated Chain-of-Thought guard model that generates stepwise reasoning instructions for safe in-context unlearning and continual updates.
   - Code: -
-- [Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html)
+- <a id="paper-li2025rmuse"></a>[Towards Reasoning-Preserving Unlearning in Multimodal Large Language Models](https://openaccess.thecvf.com/content/CVPR2026/html/Li_Towards_Reasoning-Preserving_Unlearning_in_Multimodal_Large_Language_Models_CVPR_2026_paper.html)
   - Author(s): Hongji Li, Junchi Yao, Manjiang Yu, Priyanka Singh, Xue Li, Di Wang, Lijie Hu
   - Date: 2025-11
   - Venue: CVPR 2026
@@ -371,7 +371,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: QvQ-72B-Preview, InternVL2.5-MPO
   - Summary: Introduces RMLLMU-Bench for Reasoning MLLMs alongside R-MUSE, a training-free subspace steering method that suppresses visual-textual CoT leakage while protecting a Reasoning Retain Subspace.
   - Code: -
-- [Bits Leaked per Query: Information-Theoretic Bounds on Adversarial Attacks against LLMs](https://arxiv.org/abs/2510.17000)
+- <a id="paper-kaneko2025bitsleaked"></a>[Bits Leaked per Query: Information-Theoretic Bounds on Adversarial Attacks against LLMs](https://arxiv.org/abs/2510.17000)
   - Author(s): Masahiro Kaneko, Timothy Baldwin
   - Date: 2025-10
   - Venue: NeurIPS 2025 (Spotlight)
@@ -379,7 +379,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1, OLMo-2, Llama-4
   - Summary: Defines leaked bits per query and quantifies how exposing logits or full thinking processes lowers the query complexity of attacks that recover information intended to be removed by unlearning.
   - Code: -
-- [Reasoning or Retrieval? A Study of Answer Attribution on Large Reasoning Models](https://proceedings.iclr.cc/paper_files/paper/2026/file/a7687987dcbbfe70ff5fb658346585df-Paper-Conference.pdf)
+- <a id="paper-wang2025farl"></a>[Reasoning or Retrieval? A Study of Answer Attribution on Large Reasoning Models](https://proceedings.iclr.cc/paper_files/paper/2026/file/a7687987dcbbfe70ff5fb658346585df-Paper-Conference.pdf)
   - Author(s): Yuhui Wang, Changjiang Li, Guangke Chen, Jiacheng Liang, Ting Wang
   - Date: 2025-09
   - Venue: ICLR 2026
@@ -387,7 +387,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill, Qwen3
   - Summary: Combines memory unlearning with reinforcement learning to suppress retrieval shortcuts that compete with chain-of-thought reasoning and improve reasoning-dominant answer attribution.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ZJUWYH/FARL)
-- [Rethinking Unlearning for Large Reasoning Models](https://openreview.net/forum?id=jyzjeLq7K3)
+- <a id="paper-wang2025rethinking"></a>[Rethinking Unlearning for Large Reasoning Models](https://openreview.net/forum?id=jyzjeLq7K3)
   - Author(s): Changsheng Wang, Chongyu Fan, Yihua Zhang, Jinghan Jia, Dennis Wei, Parikshit Ram, Nathalie Baracaldo, Sijia Liu
   - Date: 2025-06
   - Venue: ICML 2025 MUGen Workshop
@@ -395,7 +395,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-LLaMA-8B, DeepSeek-R1-Distill-Qwen-14B
   - Summary: Workshop formulation exposing persistent sensitive information leakage inside LRM thinking trajectories under conventional LLM unlearning and motivating reasoning-aware representation misdirection.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU)
-- [Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://aclanthology.org/2025.emnlp-main.220/)
+- <a id="paper-wang2025r2mu"></a>[Reasoning Model Unlearning: Forgetting Traces, Not Just Answers, While Preserving Reasoning Skills](https://aclanthology.org/2025.emnlp-main.220/)
   - Author(s): Changsheng Wang, Chongyu Fan, Yihua Zhang, Jinghan Jia, Dennis Wei, Parikshit Ram, Nathalie Baracaldo, Sijia Liu
   - Date: 2025-06
   - Venue: EMNLP 2025
@@ -403,7 +403,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-LLaMA-8B, DeepSeek-R1-Distill-Qwen-14B
   - Summary: First systematic study of LRM unlearning; proposes an 'unthinking' representation misdirection loss over elicited CoT segments paired with LIMO CoT representation alignment to preserve reasoning ability.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/OPTML-Group/Unlearn-R2MU)
-- [Step-by-Step Reasoning Attack: Revealing 'Erased' Knowledge in Large Language Models](https://arxiv.org/abs/2506.17279)
+- <a id="paper-sinha2025sleek"></a>[Step-by-Step Reasoning Attack: Revealing 'Erased' Knowledge in Large Language Models](https://arxiv.org/abs/2506.17279)
   - Author(s): Yash Sinha, Manit Baser, Murari Mandal, Dinil Mon Divakaran, Mohan Kankanhalli
   - Date: 2025-06
   - Venue: -
@@ -411,7 +411,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: Llama-2-7B, Mistral-7B
   - Summary: Demonstrates that step-by-step CoT reasoning acts as a black-box backdoor (`Sleek`) to reconstruct superficially erased facts across direct, implied, and indirect multi-step prompts.
   - Code: -
-- [R-TOFU: Unlearning in Large Reasoning Models](https://aclanthology.org/2025.emnlp-main.265/)
+- <a id="paper-yoon2025rtofu"></a>[R-TOFU: Unlearning in Large Reasoning Models](https://aclanthology.org/2025.emnlp-main.265/)
   - Author(s): Sangyeon Yoon, Wonje Jeung, Albert No
   - Date: 2025-05
   - Venue: EMNLP 2025
@@ -419,7 +419,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
   - Evaluated Backbones: DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-7B, DeepSeek-R1-Distill-Qwen-14B
   - Summary: Establishes the first LRM unlearning benchmark with aligned CoT annotations and step-wise metrics (`CFE`, `AFE`), proposes `Reasoned IDK` preference tuning, and uncovers `ZeroThink`/`LessThink` decoding leakage.
   - Code: [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/ssangyeon/R-TOFU) [![Project](https://img.shields.io/badge/Project-2563EB?style=flat)](https://ai-isl.github.io/r-tofu)
-- [Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps](https://arxiv.org/abs/2502.14829)
+- <a id="paper-tutek2025fur"></a>[Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps](https://arxiv.org/abs/2502.14829)
   - Author(s): Martin Tutek, Fateme Hashemi Chaleshtori, Ana Marasovic, Yonatan Belinkov
   - Date: 2025-02
   - Venue: EMNLP 2025
@@ -430,7 +430,7 @@ Full entries in reverse chronological order (`YYYY-MM`). Each entry gives the au
 
 ### 2024
 
-- [UnStar: Unlearning with Self-Taught Anti-Sample Reasoning for LLMs](https://arxiv.org/abs/2410.17050)
+- <a id="paper-sinha2024unstar"></a>[UnStar: Unlearning with Self-Taught Anti-Sample Reasoning for LLMs](https://arxiv.org/abs/2410.17050)
   - Author(s): Yash Sinha, Murari Mandal, Mohan Kankanhalli
   - Date: 2024-10
   - Venue: TMLR 2025

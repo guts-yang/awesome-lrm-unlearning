@@ -40,27 +40,87 @@
   "news": [
     {
       "date": "2026-11-21",
-      "content": "Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works; refreshed formal venue and code links."
+      "content": "Expanded after cross-checking arXiv, OpenAlex, Semantic Scholar, ACL Anthology, OpenReview, NeurIPS, ICLR, CVPR, PAKDD, and related paper indexes: added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works; refreshed formal venue and code links.",
+      "links": [
+        {
+          "text": "added nine LRM/CoT, agent-trajectory, multi-hop, and reasoning-aware audit works",
+          "anchor": "papers-by-chronological-order"
+        }
+      ]
     },
     {
       "date": "2026-11",
-      "content": "Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics."
+      "content": "Initial repository release, with a taxonomy-structured reading list, chronological tracking, LRM-specific benchmarks, and CoT evaluation metrics.",
+      "links": [
+        {
+          "text": "taxonomy-structured reading list",
+          "anchor": "papers-by-research-taxonomy"
+        },
+        {
+          "text": "chronological tracking",
+          "anchor": "papers-by-chronological-order"
+        },
+        {
+          "text": "LRM-specific benchmarks",
+          "anchor": "benchmarks--evaluation-suites"
+        },
+        {
+          "text": "CoT evaluation metrics",
+          "anchor": "evaluation-metrics-for-lrm--cot-unlearning"
+        }
+      ]
     },
     {
       "date": "2026-10",
-      "content": "**REDaCT** (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces."
+      "content": "**REDaCT** (*Findings of EMNLP 2026*) introduces collapse-free inference-time sentence-level leak detection and corrective embedding injection inside CoT traces.",
+      "links": [
+        {
+          "text": "**REDaCT**",
+          "paper_id": "maccoby2026redact"
+        }
+      ]
     },
     {
       "date": "2026-09",
-      "content": "**GUARD** proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`)."
+      "content": "**GUARD** proposes Guided Answer-Reasoning Distillation for natural safe-exit CoT trajectories and introduces the Natural Forgetting Reasoning Score (`NFRS`).",
+      "links": [
+        {
+          "text": "**GUARD**",
+          "paper_id": "yan2026guard"
+        }
+      ]
     },
     {
       "date": "2026-07",
-      "content": "**CiPO** (*ACL 2026*) formulates causal counterfactual CoT preference optimization for LRMs; **R-MUSE / RMLLMU-Bench** (*CVPR 2026*) extends reasoning-preserving unlearning to Multimodal LRMs."
+      "content": "**CiPO** (*ACL 2026*) formulates causal counterfactual CoT preference optimization for LRMs; **R-MUSE / RMLLMU-Bench** (*CVPR 2026*) extends reasoning-preserving unlearning to Multimodal LRMs.",
+      "links": [
+        {
+          "text": "**CiPO**",
+          "paper_id": "li2026cipo"
+        },
+        {
+          "text": "**R-MUSE / RMLLMU-Bench**",
+          "paper_id": "li2025rmuse"
+        }
+      ]
     },
     {
       "date": "2025-11",
-      "content": "Landmark *EMNLP 2025* trio establishes the sub-field: **R-TOFU** (first LRM unlearning benchmark + `Reasoned IDK`), **R2MU** (reasoning-aware representation misdirection), and **FUR** (parametric CoT faithfulness via step unlearning)."
+      "content": "Landmark *EMNLP 2025* trio establishes the sub-field: **R-TOFU** (first LRM unlearning benchmark + `Reasoned IDK`), **R2MU** (reasoning-aware representation misdirection), and **FUR** (parametric CoT faithfulness via step unlearning).",
+      "links": [
+        {
+          "text": "**R-TOFU**",
+          "paper_id": "yoon2025rtofu"
+        },
+        {
+          "text": "**R2MU**",
+          "paper_id": "wang2025r2mu"
+        },
+        {
+          "text": "**FUR**",
+          "paper_id": "tutek2025fur"
+        }
+      ]
     }
   ],
   "papers": [

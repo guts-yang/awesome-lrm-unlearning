@@ -50,6 +50,64 @@ def slugify_heading(heading: str) -> str:
     return cleaned.replace(" ", "-")
 
 
+def paper_anchor(paper_id: str) -> str:
+    """Stable fragment id for one chronological paper entry.
+
+    Those entries are list items, so GitHub does not assign a heading
+    anchor, and a title slug can collide. The paper id survives regeneration.
+    """
+    return f"paper-{paper_id}"
+
+
+_EXPLICIT_ANCHOR_RE = re.compile(
+    r"""<a\b[^>]*\bid\s*=\s*["']([^"']+)["']""",
+    flags=re.IGNORECASE,
+)
+
+
+def collect_readme_anchors(markdown: str) -> set[str]:
+    """Heading slugs plus explicit HTML ids that in-page links can target."""
+    headings = {
+        slugify_heading(match.group(1).strip())
+        for match in re.finditer(r"^#{1,6}\s+(.+)$", markdown, flags=re.MULTILINE)
+    }
+    return headings | set(_EXPLICIT_ANCHOR_RE.findall(markdown))
+
+
+def apply_highlight_links(
+    content: str,
+    links: list[dict[str, Any]] | None,
+    paper_ids: set[str],
+) -> str:
+    """Wrap highlight phrases in links to a paper entry or a section anchor."""
+    if not links:
+        raise ValueError(f"Highlight has no jump target: {content[:80]}")
+
+    # Longer phrases first so a short label cannot consume part of a longer one.
+    ordered = sorted(links, key=lambda item: len(item.get("text", "")), reverse=True)
+    for item in ordered:
+        text = item.get("text", "")
+        has_paper = "paper_id" in item
+        has_anchor = "anchor" in item
+        if not text or has_paper == has_anchor:
+            raise ValueError(
+                "Each highlight link needs text and exactly one of paper_id or anchor."
+            )
+        if has_paper:
+            paper_id = item["paper_id"]
+            if paper_id not in paper_ids:
+                raise ValueError(f"Highlight links unknown paper id: {paper_id}")
+            anchor = paper_anchor(paper_id)
+        else:
+            anchor = item["anchor"]
+            if not isinstance(anchor, str) or not anchor or anchor.startswith("#"):
+                raise ValueError(f"Highlight section anchor must be a bare id: {anchor!r}")
+        if content.count(text) != 1:
+            raise ValueError(f"Highlight link text must appear exactly once: {text}")
+        content = content.replace(text, f"[{text}](#{anchor})", 1)
+    return content
+
+
 def render_readme() -> str:
     papers_data = load_json(PAPERS_PATH)
     bm_data = load_json(BENCH_METRICS_PATH)
@@ -193,11 +251,14 @@ def render_readme() -> str:
     )
     lines.append("")
 
-    # 4. News
+    # 4. News. Named papers jump to their chronological entry; named
+    # sections jump to that heading. Link text is the original phrase.
     lines.append("## News & Highlights")
     lines.append("")
+    paper_ids = {p["id"] for p in papers}
     for item in papers_data["news"]:
-        lines.append(f"- **`[{item['date']}]`** {item['content']}")
+        body = apply_highlight_links(item["content"], item.get("links"), paper_ids)
+        lines.append(f"- **`[{item['date']}]`** {body}")
     lines.append("")
 
     # 5. View 1: Taxonomy-Structured Paper Catalog (tamlhp style)
@@ -258,7 +319,9 @@ def render_readme() -> str:
             ]
             cat_str = " / ".join(cat_tags)
             models_str = ", ".join(p["models"])
-            lines.append(f"- [{p['title']}]({p['paper_url']})")
+            lines.append(
+                f'- <a id="{paper_anchor(p["id"])}"></a>[{p["title"]}]({p["paper_url"]})'
+            )
             lines.append(f"  - Author(s): {', '.join(p['authors'])}")
             lines.append(f"  - Date: {p['date']}")
             lines.append(f"  - Venue: {venue_str}")
