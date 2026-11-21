@@ -134,6 +134,16 @@ def render_readme() -> str:
     lines.append("")
     lines.append("$$\\pi_{\\theta}(c, a \\mid q) = \\pi_{\\theta}(c \\mid q)\\,\\pi_{\\theta}(a \\mid q, c)$$")
     lines.append("")
+    lines.append('<p align="center">')
+    lines.append(
+        '  <img src="figs/cot_prompting_figure1.png" alt="Original Chain-of-Thought Prompting Figure 1" width="90%">'
+    )
+    lines.append("  <br>")
+    lines.append(
+        '  <em>Figure 1 from <a href="https://arxiv.org/abs/2201.11903">Wei et al., Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>.</em>'
+    )
+    lines.append("</p>")
+    lines.append("")
     lines.append("Applying answer-centric unlearning to LRMs exposes a fundamental **forgetting–reasoning dilemma**:")
     lines.append("")
     lines.append(
