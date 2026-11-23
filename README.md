@@ -13,6 +13,8 @@ The list currently contains **34** papers, **10** benchmarks and evaluation suit
 
 > **Scope.** An entry belongs here when multi-step chain-of-thought traces, thinking trajectories (`<think>...</think>`), or large reasoning models are central to the method or the evaluation. To add a paper, benchmark, or codebase, open an [Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md).
 
+> **Survey.** For a field overview, research timeline, and beginner-friendly reading guide, see the [LRM Unlearning Survey (English)](survey/lrm_unlearning_formulas.html) · [中文版](survey/lrm_unlearning_formulas_CN.html).
+
 ## Contents
 
 - [Overview: Why LRM & CoT Unlearning?](#overview-why-lrm--cot-unlearning)

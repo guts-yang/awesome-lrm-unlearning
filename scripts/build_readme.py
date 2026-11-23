@@ -175,6 +175,13 @@ def render_readme() -> str:
         "[Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md)."
     )
     lines.append("")
+    lines.append(
+        "> **Survey.** For a field overview, research timeline, and beginner-friendly "
+        "reading guide, see the [LRM Unlearning Survey (English)]"
+        "(survey/lrm_unlearning_formulas.html) · [中文版]"
+        "(survey/lrm_unlearning_formulas_CN.html)."
+    )
+    lines.append("")
 
     # 2. Table of Contents
     lines.append("## Contents")
