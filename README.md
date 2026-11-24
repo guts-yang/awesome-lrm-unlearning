@@ -3,7 +3,6 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://img.shields.io/badge/Awesome-LRM_Unlearning-0F172A?style=for-the-badge&labelColor=000000" alt="Awesome LRM Unlearning"></a>
   <a href="#papers-by-chronological-order"><img src="https://img.shields.io/badge/Papers-34-0F172A?style=for-the-badge&labelColor=000000" alt="34 registered papers"></a>
-  <a href="https://github.com/guts-yang/awesome-lrm-unlearning/commits"><img src="https://img.shields.io/github/last-commit/guts-yang/awesome-lrm-unlearning?style=for-the-badge&logo=github&logoColor=white&label=Last%20Commit&labelColor=000000&color=0F172A" alt="Last Commit"></a>
   <a href="https://github.com/guts-yang/awesome-lrm-unlearning/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&labelColor=000000" alt="License"></a>
 </p>
 

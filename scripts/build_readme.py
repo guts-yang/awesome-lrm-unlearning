@@ -147,9 +147,6 @@ def render_readme() -> str:
         f'  <a href="#papers-by-chronological-order"><img src="https://img.shields.io/badge/Papers-{total_papers}-0F172A?style=for-the-badge&labelColor=000000" alt="{total_papers} registered papers"></a>'
     )
     lines.append(
-        f'  <a href="https://github.com/{owner}/{repo_name}/commits"><img src="https://img.shields.io/github/last-commit/{owner}/{repo_name}?style=for-the-badge&logo=github&logoColor=white&label=Last%20Commit&labelColor=000000&color=0F172A" alt="Last Commit"></a>'
-    )
-    lines.append(
         f'  <a href="https://github.com/{owner}/{repo_name}/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge&labelColor=000000" alt="License"></a>'
     )
     lines.append("</p>")
