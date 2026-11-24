@@ -25,9 +25,6 @@ jobs:
         run: |
           mkdir -p _site
           cp -R survey/* _site/
-          if [ ! -f _site/index.html ]; then
-            cp _site/lrm_unlearning_formulas.html _site/index.html
-          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

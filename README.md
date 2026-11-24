@@ -13,7 +13,7 @@ The list currently contains **34** papers, **10** benchmarks and evaluation suit
 
 > **Scope.** An entry belongs here when multi-step chain-of-thought traces, thinking trajectories (`<think>...</think>`), or large reasoning models are central to the method or the evaluation. To add a paper, benchmark, or codebase, open an [Issue](../../issues) or send a [Pull Request](CONTRIBUTING.md).
 
-> **Survey.** For a field overview, research timeline, and beginner-friendly reading guide, see the [LRM Unlearning Survey (English, rendered)](https://guts-yang.github.io/awesome-lrm-unlearning/lrm_unlearning_formulas.html) · [中文版（渲染页）](https://guts-yang.github.io/awesome-lrm-unlearning/lrm_unlearning_formulas_CN.html).
+> **Survey.** For a field overview, research timeline, and beginner-friendly reading guide, see the [LRM Unlearning Survey (rendered)](https://guts-yang.github.io/awesome-lrm-unlearning/). Opens in English by default; use the **EN / 中文** switcher at the top-right for the Chinese version.
 
 ## Contents
 

@@ -177,10 +177,10 @@ def render_readme() -> str:
     lines.append("")
     lines.append(
         "> **Survey.** For a field overview, research timeline, and beginner-friendly "
-        "reading guide, see the [LRM Unlearning Survey (English, rendered)]"
-        "(https://guts-yang.github.io/awesome-lrm-unlearning/lrm_unlearning_formulas.html) · "
-        "[中文版（渲染页）]"
-        "(https://guts-yang.github.io/awesome-lrm-unlearning/lrm_unlearning_formulas_CN.html)."
+        "reading guide, see the [LRM Unlearning Survey (rendered)]"
+        "(https://guts-yang.github.io/awesome-lrm-unlearning/). "
+        "Opens in English by default; use the **EN / 中文** switcher at the "
+        "top-right for the Chinese version."
     )
     lines.append("")
 

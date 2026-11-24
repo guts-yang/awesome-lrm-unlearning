@@ -1,0 +1,45 @@
+{
+  "skill": "render-html",
+  "artifact": "survey/index.html (bilingual single-file view)",
+  "generator": "scripts/build_bilingual_survey.py",
+  "sources": [
+    "docs/tutorials/lrm_unlearning_formulas.md (English, sha 24f49d5ccf8d)",
+    "docs/tutorials/lrm_unlearning_formulas_CN.md (Chinese, sha be1698cc3a1d)"
+  ],
+  "output": "survey/index.html",
+  "structure": {
+    "single_file": true,
+    "panes": 2,
+    "language_switcher": "top-right, EN / 中文 buttons",
+    "default_language": "en",
+    "choice_persisted": "localStorage aris-survey-lang",
+    "heading_ids_namespaced": "en-* (61) and cn-* (61), no collisions",
+    "toc_hrefs_namespaced": "en-* (61) and cn-* (61)",
+    "math_retypeset_on_switch": "MathJax.typesetPromise on visible pane",
+    "print": "switcher hidden; both panes would print (use EN/中文 before printing)"
+  },
+  "rendering": "Reuses /render-html helper functions (parse_blocks, _render_blocks, render_toc, load_template, CDN_BLOCK_FULL, substitute). MD remains canonical source; HTML is generated view.",
+  "local_verification": {
+    "size_bytes": 316266,
+    "html_lang": "en",
+    "unreplaced_placeholders": 0,
+    "two_lang_panes": true,
+    "two_switch_buttons": true,
+    "duplicate_h1_in_each_pane": false
+  },
+  "review_gate": {
+    "verdict": "REVIEW_UNAVAILABLE",
+    "reason": "Per render-html skill, academic-template HTML is reviewed by a fresh cross-model (Codex) thread at the artifact boundary. No cross-model reviewer backend is mounted in this environment, so an independent render-fidelity review could not be performed. NOT fabricated as PASS.",
+    "checks_completed_locally": [
+      "Information fidelity: both EN and CN bodies rendered from their MD sources with identical structure (61 headings/TOC each)",
+      "Structure: heading hierarchy, tables, details, math delimiters preserved via skill renderer",
+      "id/href namespacing prevents EN/CN anchor collisions",
+      "Safety/escaping: skill sanitizer applied to MD content; no raw scripts from source",
+      "Placeholder leakage: 0 unreplaced {{PLACEHOLDER}}"
+    ],
+    "not_claimed": "Independent cross-model render audit; claim-truthfulness audit (owned upstream)"
+  },
+  "pages": "Deployed via .github/workflows/deploy-pages.yml to https://guts-yang.github.io/awesome-lrm-unlearning/ (root index.html renders on click).",
+  "summary": "Single bilingual HTML generated from the two canonical Markdown sources, with a top-right EN/中文 switcher defaulting to English. Independent cross-model render review unavailable in this environment (REVIEW_UNAVAILABLE, not PASS).",
+  "rendered_at": "2026-11-24"
+}
